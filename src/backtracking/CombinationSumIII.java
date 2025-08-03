@@ -15,7 +15,7 @@ public class CombinationSumIII {
         for (int i = idx; i >= 1; i--) {
             temp.add(i);
             backtrack(i - 1, k, temp, sum + i, target);
-            temp.removeLast();
+            temp.remove(temp.size() - 1);
         }
     }
 
@@ -27,7 +27,7 @@ public class CombinationSumIII {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> res = combinationSum3(2,18);
+        List<List<Integer>> res = combinationSum3(2, 18);
         System.out.println(res);
     }
 }
