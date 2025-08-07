@@ -24,11 +24,11 @@ public class PalindromePartitionII {
             return;
         }
 
-        for (int i = idx; i<str.length(); i++) {
+        for (int i = idx; i < str.length(); i++) {
             if (isPalindrome(str, idx, i)) {
-                temp.add(str.substring(idx, i+1));
-                recursion(i+1, temp, str);
-                temp.removeLast();
+                temp.add(str.substring(idx, i + 1));
+                recursion(i + 1, temp, str);
+                temp.remove(temp.size() - 1);
             }
         }
     }
