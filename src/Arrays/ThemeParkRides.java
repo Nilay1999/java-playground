@@ -1,6 +1,9 @@
+package Arrays;
+
 public class ThemeParkRides {
 
-    public static int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {
+    public static int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime,
+            int[] waterDuration) {
         int n = landStartTime.length;
         int m = waterStartTime.length;
 
