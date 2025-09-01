@@ -3,59 +3,39 @@ package DynamicProgramming;
 import java.util.*;
 
 public class TwistedMirrorPathCount {
-    private static final int MOD = 1000000007;
-    private int m, n;
-    private int[][] grid;
-    private int[][] dp;
+    int m, n;
+    int[][] g;
+    Long[][][] cache;
+    int MOD = 1000000007;
+
+    long dfs(int x, int y, int from) {
+        if (x < 0 || y < 0 || x >= m || y >= n) return 0;
+        if (x == m - 1 && y == n - 1) return 1;
+
+        if (cache[x][y][from] != null) return cache[x][y][from];
+
+        long result = 0;
+
+        if (g[x][y] == 0) {
+            result = (dfs(x + 1, y, 1) + dfs(x, y + 1, 0)) % MOD;
+        } else {
+            if (from == 0) {
+                result = dfs(x + 1, y, 1);
+            } else {
+                result = dfs(x, y + 1, 0);
+            }
+        }
+
+        return cache[x][y][from] = result;
+    }
 
     public int uniquePaths(int[][] grid) {
-        this.grid = grid;
-        this.m = grid.length;
-        this.n = grid[0].length;
-        this.dp = new int[m][n];
+        m = grid.length;
+        n = grid[0].length;
+        g = grid;
+        cache = new Long[m][n][2];
 
-        for (int[] row : dp) {
-            Arrays.fill(row, -1);
-        }
-
-        return dfs(0, 0);
-    }
-
-    private int dfs(int i, int j) {
-        if (i == m - 1 && j == n - 1) return 1;
-        if (i < 0 || i >= m || j < 0 || j >= n) return 0;
-        if (dp[i][j] != -1) return dp[i][j];
-
-        long res = 0;
-
-        // Move right
-        int[] right = move(i, j, true);
-        if (right != null) {
-            res += dfs(right[0], right[1]);
-        }
-
-        // Move down
-        int[] down = move(i, j, false);
-        if (down != null) {
-            res += dfs(down[0], down[1]);
-        }
-
-        return dp[i][j] = (int) (res % MOD);
-    }
-
-    // Move: dir=true → right, dir=false → down
-    private int[] move(int i, int j, boolean dirRight) {
-        int newI = i + (dirRight ? 0 : 1);
-        int newJ = j + (dirRight ? 1 : 0);
-
-        if (newI >= m || newJ >= n) return null;
-
-        if (grid[newI][newJ] == 0) {
-            return new int[]{newI, newJ};
-        } else {
-            // Mirror reflects: right → down, down → right
-            return move(newI, newJ, !dirRight);
-        }
+        return (int) dfs(0, 0, 0);
     }
 
     public static void main(String[] args) {
