@@ -5,17 +5,18 @@ import java.util.Stack;
 public class InfixToPostfix {
 
     static boolean isOperator(char x) {
-        return switch (x) {
-            case '+', '-', '*', '/', '^', '%' -> true;
-            default -> false;
-        };
+        return (x == '+' || x == '-' || x == '*' || x == '/' || x == '^' || x == '%');
     }
 
     static int prec(char c) {
-        if (c == '^') return 3;
-        else if (c == '/' || c == '*') return 2;
-        else if (c == '+' || c == '-') return 1;
-        else return -1;
+        if (c == '^')
+            return 3;
+        else if (c == '/' || c == '*')
+            return 2;
+        else if (c == '+' || c == '-')
+            return 1;
+        else
+            return -1;
     }
 
     public static String infixToPostfix(String exp) {
@@ -25,7 +26,8 @@ public class InfixToPostfix {
         for (int i = 0; i < exp.length(); i++) {
             char c = exp.charAt(i);
 
-            if (Character.isLetterOrDigit(c)) result.append(c);
+            if (Character.isLetterOrDigit(c))
+                result.append(c);
 
             else if (c == '(') {
                 stack.push(c);
@@ -42,7 +44,8 @@ public class InfixToPostfix {
             }
         }
         while (!stack.isEmpty()) {
-            if (stack.peek() == '(') return "Invalid Expression";
+            if (stack.peek() == '(')
+                return "Invalid Expression";
             result.append(stack.pop());
         }
         return result.toString();
