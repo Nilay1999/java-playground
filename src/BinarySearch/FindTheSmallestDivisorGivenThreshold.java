@@ -20,7 +20,6 @@ public class FindTheSmallestDivisorGivenThreshold {
     }
 
     public int smallestDivisor(int[] nums, int threshold) {
-        int n = nums.length;
         int left = 1;
         int right = findMax(nums);
 
@@ -38,7 +37,7 @@ public class FindTheSmallestDivisorGivenThreshold {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 5, 9};
+        int[] nums = { 1, 2, 5, 9 };
         int threshold = 6;
 
         System.out.println(new FindTheSmallestDivisorGivenThreshold().smallestDivisor(nums, threshold));

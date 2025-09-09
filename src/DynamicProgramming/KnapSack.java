@@ -3,7 +3,6 @@ package DynamicProgramming;
 public class KnapSack {
 
     private int dfs(Integer[][] memo, int[] profit, int[] weight, int capacity, int idx) {
-        int n = profit.length;
         if (capacity == 0 || idx == 0) {
             return 0;
         }
@@ -31,8 +30,8 @@ public class KnapSack {
     }
 
     public static void main(String[] args) {
-        int[] weight = {4, 5, 1};
-        int[] profit = {1, 2, 3};
+        int[] weight = { 4, 5, 1 };
+        int[] profit = { 1, 2, 3 };
         int capacity = 4;
 
         System.out.println(new KnapSack().memoization(profit, weight, capacity));

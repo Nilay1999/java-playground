@@ -7,9 +7,10 @@ public class UniquePathsIII {
         if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] == -1) {
             return;
         }
-        int[][] direction = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int[][] direction = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         if (grid[x][y] == 2) {
-            if (visited == totalEmptyCell) totalPaths++;
+            if (visited == totalEmptyCell)
+                totalPaths++;
             return;
         }
 
@@ -46,10 +47,12 @@ public class UniquePathsIII {
     }
 
     public static void main(String[] args) {
-        int[][] grid = {{1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 2}};
-        int[][] grid2 = {{0, 1}, {2, 0}};
-        int[][] grid3 = {{1, 0, 0, -1}, {0, 0, 0, -1}, {0, 0, 0, 2}};
+        int[][] grid = { { 1, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 2 } };
+        int[][] grid2 = { { 0, 1 }, { 2, 0 } };
+        int[][] grid3 = { { 1, 0, 0, -1 }, { 0, 0, 0, -1 }, { 0, 0, 0, 2 } };
 
+        System.out.printf("Answer: %d", uniquePaths(grid));
+        System.out.printf("Answer: %d", uniquePaths(grid2));
         System.out.printf("Answer: %d", uniquePaths(grid3));
     }
 }

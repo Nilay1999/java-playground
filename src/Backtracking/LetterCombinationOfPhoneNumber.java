@@ -30,7 +30,6 @@ public class LetterCombinationOfPhoneNumber {
         if (digits == null || digits.isEmpty()) {
             return res;
         }
-        int n = digits.length();
         backtrack(res, digits, 0, new StringBuilder());
         return res;
     }
@@ -52,7 +51,7 @@ public class LetterCombinationOfPhoneNumber {
     public static void main(String[] args) {
         // Example usage
         System.out.println(letterCombinations("23")); // Output: [ad, ae, af, bd, be, bf, cd, ce, cf]
-        System.out.println(letterCombinations(""));   // Output: []
-        System.out.println(letterCombinations("2"));  // Output: [a, b, c]
+        System.out.println(letterCombinations("")); // Output: []
+        System.out.println(letterCombinations("2")); // Output: [a, b, c]
     }
 }

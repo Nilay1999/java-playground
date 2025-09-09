@@ -13,7 +13,6 @@ public class LongestValidBraces {
             if (s.charAt(i) == '(') {
                 stack.push(i);
             } else {
-                int top = stack.pop();
                 if (stack.isEmpty()) {
                     stack.push(i);
                 } else {

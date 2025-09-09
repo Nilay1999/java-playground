@@ -1,8 +1,5 @@
 package SlidingWindow;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-
 public class FruitsIntoBasketII {
     public static int numOfUnplacedFruits(int[] fruits, int[] baskets) {
         int ans = 0;
@@ -19,8 +16,8 @@ public class FruitsIntoBasketII {
     }
 
     public static void main(String[] args) {
-        int[] fruits = {3, 6, 1};
-        int[] basket = {6, 4, 7};
+        int[] fruits = { 3, 6, 1 };
+        int[] basket = { 6, 4, 7 };
         System.out.printf("Answer: %d", numOfUnplacedFruits(fruits, basket));
     }
 }

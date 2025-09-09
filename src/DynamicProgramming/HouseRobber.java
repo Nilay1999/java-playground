@@ -1,6 +1,5 @@
 package DynamicProgramming;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +33,12 @@ public class HouseRobber {
 
     public int memoization(int[] houses) {
         int n = houses.length;
-        if (n == 0) return 0;
-        if (n == 1) return houses[0];
-        if (n == 2) return Math.max(houses[0], houses[1]);
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return houses[0];
+        if (n == 2)
+            return Math.max(houses[0], houses[1]);
 
         memo.clear(); // Ensure fresh run
         return recursion(n - 1, houses);
@@ -44,9 +46,12 @@ public class HouseRobber {
 
     public int tabulation(int[] houses) {
         int n = houses.length;
-        if (n == 0) return 0;
-        if (n == 1) return houses[0];
-        if (n == 2) return Math.max(houses[0], houses[1]);
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return houses[0];
+        if (n == 2)
+            return Math.max(houses[0], houses[1]);
 
         int[] dp = new int[n];
         dp[0] = houses[0];
@@ -60,11 +65,10 @@ public class HouseRobber {
     }
 
     public static void main(String[] args) {
-        int[] houses = {1, 4, 5, 7, 2, 1, 9};
+        int[] houses = { 1, 4, 5, 7, 2, 1, 9 };
         HouseRobber houseRobber = new HouseRobber();
 
-        System.out.println("Memoization: " + houseRobber.memoization(houses));  // Output: 21
-        System.out.println("Tabulation: " + houseRobber.tabulation(houses));    // Output: 21
+        System.out.println("Memoization: " + houseRobber.memoization(houses)); // Output: 21
+        System.out.println("Tabulation: " + houseRobber.tabulation(houses)); // Output: 21
     }
 }
-

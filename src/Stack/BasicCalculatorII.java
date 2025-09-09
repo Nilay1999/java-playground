@@ -1,14 +1,11 @@
 package Stack;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class BasicCalculatorII {
     public static int calculate(String s) {
         Stack<Integer> stack = new Stack<>();
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        
+
         char prev = '+';
         int num = 0;
 

@@ -1,11 +1,7 @@
 package Stack;
 
-
-import java.util.Arrays;
-
 public class MaximumRectangle {
     public static int maximalRectangle(char[][] matrix) {
-        int max = 0;
         int row = matrix.length, col = matrix[0].length;
 
         int[][] dp = new int[row][col];
@@ -35,8 +31,9 @@ public class MaximumRectangle {
     }
 
     public static void main(String[] args) {
-        char[][] box = {{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0',
-                '0', '1', '0'}};
+        char[][] box = { { '1', '0', '1', '0', '0' }, { '1', '0', '1', '1', '1' }, { '1', '1', '1', '1', '1' },
+                { '1', '0',
+                        '0', '1', '0' } };
         System.out.println(maximalRectangle(box));
     }
 }
