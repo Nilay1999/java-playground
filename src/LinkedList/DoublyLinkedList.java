@@ -232,7 +232,7 @@ public class DoublyLinkedList {
         dll.insertAtPosition(2, 15);
 
         System.out.println("After insertions:");
-        dll.displayForward();  // Output: Forward: 5 10 15 20 30
+        dll.displayForward(); // Output: Forward: 5 10 15 20 30
         dll.displayBackward(); // Output: Backward: 30 20 15 10 5
 
         // Test search
@@ -248,7 +248,7 @@ public class DoublyLinkedList {
         dll.deleteFromEnd();
 
         System.out.println("After deletions:");
-        dll.displayForward();  // Output: Forward: 10 20
+        dll.displayForward(); // Output: Forward: 10 20
 
         System.out.println("Size: " + dll.size()); // 2
     }

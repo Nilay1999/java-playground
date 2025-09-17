@@ -33,19 +33,19 @@ public class ThemeParkRides {
 
     public static void main(String[] args) {
         // Example test case
-        int[] landStartTime = {2, 8};
-        int[] landDuration = {4, 1};
-        int[] waterStartTime = {6};
-        int[] waterDuration = {3};
+        int[] landStartTime = { 2, 8 };
+        int[] landDuration = { 4, 1 };
+        int[] waterStartTime = { 6 };
+        int[] waterDuration = { 3 };
 
         int result = earliestFinishTime(landStartTime, landDuration, waterStartTime, waterDuration);
-        System.out.println("Earliest possible finish time: " + result);  // Should print 9
+        System.out.println("Earliest possible finish time: " + result); // Should print 9
 
         // Complex test case example
-        int[] landStartComplex = {1, 5, 10, 15};
-        int[] landDurComplex = {5, 6, 2, 8};
-        int[] waterStartComplex = {3, 14, 7};
-        int[] waterDurComplex = {10, 1, 8};
+        int[] landStartComplex = { 1, 5, 10, 15 };
+        int[] landDurComplex = { 5, 6, 2, 8 };
+        int[] waterStartComplex = { 3, 14, 7 };
+        int[] waterDurComplex = { 10, 1, 8 };
 
         int complexResult = earliestFinishTime(landStartComplex, landDurComplex, waterStartComplex, waterDurComplex);
         System.out.println("Earliest finish time (complex case): " + complexResult);
