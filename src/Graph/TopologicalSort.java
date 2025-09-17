@@ -6,7 +6,7 @@ public class TopologicalSort {
 
     public static void main(String[] args) {
         int n = 6;
-        int[][] edges = {{2, 3}, {3, 1}, {4, 0}, {4, 1}, {5, 0}, {5, 2}};
+        int[][] edges = { { 2, 3 }, { 3, 1 }, { 4, 0 }, { 4, 1 }, { 5, 0 }, { 5, 2 } };
         List<List<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
@@ -20,7 +20,6 @@ public class TopologicalSort {
 
     public int[] topologicalSortBfs(List<List<Integer>> adj, int n) {
         Queue<Integer> queue = new LinkedList<>();
-        boolean[] visited = new boolean[n];
         int[] indegree = new int[n];
 
         for (int u = 0; u < n; u++) {

@@ -1,13 +1,14 @@
 package Graph;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.Stack;
 
 public class CourseScheduleII {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         List<List<Integer>> adjList = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+
         for (int i = 0; i < numCourses; i++) {
             adjList.add(new ArrayList<>());
         }
@@ -18,24 +19,42 @@ public class CourseScheduleII {
             adjList.get(pre).add(course);
         }
 
-        List<Integer> result = new ArrayList<>();
-
-        Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[numCourses];
-        queue.offer(0);
-
-        while (!queue.isEmpty()) {
-            Integer node = queue.poll();
-            result.add(node);
-            for (Integer level : adjList.get(node)) {
-                if (!visited[level]) {
-                    visited[level] = true;
-                    queue.add(level);
+        int[] status = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if (!visited[i]) {
+                if (!dfs(stack, visited, adjList, status, i)) {
+                    return new int[] {};
                 }
-
             }
         }
-        return result.stream().mapToInt(Integer::intValue).toArray();
+
+        int[] res = new int[numCourses];
+        int idx = 0;
+        while (!stack.isEmpty()) {
+            res[idx] = stack.pop();
+            idx++;
+        }
+
+        return res;
+    }
+
+    private boolean dfs(Stack<Integer> stack, boolean[] visited, List<List<Integer>> adjList, int[] status, int node) {
+        visited[node] = true;
+        status[node] = 1;
+
+        for (int i : adjList.get(node)) {
+            if (status[i] == 1) {
+                return false;
+            }
+            if (!visited[i] && !dfs(stack, visited, adjList, status, i)) {
+                return false;
+            }
+        }
+        status[node] = 2;
+
+        stack.push(node);
+        return true;
     }
 
     public static void main(String[] args) {
