@@ -44,17 +44,8 @@ public class DungeonGame {
         return recursion(dungeon, dp, 0, 0, n, m);
     }
 
-    public static int tabulation(int[][] dungeon) {
-        int n = dungeon.length;
-        int m = dungeon[0].length;
-
-        int[][] dp = new int[n + 1][m + 1];
-
-        return 1;
-    }
-
     public static void main(String[] args) {
-        int[][] dungeon = {{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
+        int[][] dungeon = { { -2, -3, 3 }, { -5, -10, 1 }, { 10, 30, -5 } };
 
         System.out.println(calculateMinimumHP(dungeon));
     }
