@@ -6,7 +6,8 @@ import java.util.List;
 public class DetectCycleInUndirectedGraph {
     public static void main(String[] args) {
         int V = 5;
-        int[][] edges = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {3, 4}};
+        int[][] edges = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 1, 2 }, { 3, 4 } };
+        System.out.println(new DetectCycleInUndirectedGraph().detectCycle(edges, V));
     }
 
     public boolean detectCycle(int[][] edges, int n) {
