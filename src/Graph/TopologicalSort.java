@@ -18,6 +18,7 @@ public class TopologicalSort {
         System.out.println(Arrays.toString(new TopologicalSort().topologicalSortBfs(adj, n)));
     }
 
+    // Kahn's Algorithm
     public int[] topologicalSortBfs(List<List<Integer>> adj, int n) {
         Queue<Integer> queue = new LinkedList<>();
         int[] indegree = new int[n];
