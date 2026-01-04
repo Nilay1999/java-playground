@@ -1,4 +1,4 @@
-package Arrays.prefix;
+package Array.prefix;
 
 public class NumMatrix {
     private int[][] prefix;

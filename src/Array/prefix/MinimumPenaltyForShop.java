@@ -1,4 +1,4 @@
-package Arrays.prefix;
+package Array.prefix;
 
 public class MinimumPenaltyForShop {
     public int bestClosingTime(String customers) {

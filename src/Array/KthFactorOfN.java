@@ -1,4 +1,4 @@
-package Arrays;
+package Array;
 
 public class KthFactorOfN {
     public int kthFactor(int n, int k) {
