@@ -32,8 +32,8 @@ public class FindLeastFrequentDigit {
         int ans = 0;
         for (Map.Entry<Integer, Integer> entry : frq.entrySet()) {
             if (entry.getValue() < min) {
-                ans = entry.getKey();    // store the digit
-                min = entry.getValue();  // update minimum frequency
+                ans = entry.getKey(); // store the digit
+                min = entry.getValue(); // update minimum frequency
             }
         }
         return ans;

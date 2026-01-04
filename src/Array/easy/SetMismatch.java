@@ -5,7 +5,8 @@ import java.util.Set;
 
 /**
  * Set Mismatch Algorithm (Array with HashSet):
- * Given an array containing numbers from 1 to n, find the duplicate and missing number.
+ * Given an array containing numbers from 1 to n, find the duplicate and missing
+ * number.
  * The array has exactly one duplicate and one missing number.
  * 
  * PROBLEM DESCRIPTION:

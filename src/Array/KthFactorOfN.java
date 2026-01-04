@@ -16,7 +16,7 @@ public class KthFactorOfN {
      */
     public int kthFactor(int n, int k) {
         int counter = 0; // count of factors found so far
-        
+
         // Check each number from 1 to n
         for (int i = 1; i <= n; i++) {
             // If i divides n evenly, it's a factor

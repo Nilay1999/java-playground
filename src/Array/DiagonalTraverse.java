@@ -16,21 +16,21 @@ public class DiagonalTraverse {
      * - Down-left: hit bottom edge → move right, hit left edge → move down
      * 
      * Visual for 3x3:
-     * 1 → 2   4
-     * ↓   ↗ ↙ ↑
-     * 3   5   7
-     * ↓ ↙   ↗ ↑
-     * 6 ← 8   9
+     * 1 → 2 4
+     * ↓ ↗ ↙ ↑
+     * 3 5 7
+     * ↓ ↙ ↗ ↑
+     * 6 ← 8 9
      * 
      * Time: O(m*n), Space: O(1) excluding output
      */
     public int[] findDiagonalOrder(int[][] mat) {
-        int n = mat.length;    // number of rows
+        int n = mat.length; // number of rows
         int m = mat[0].length; // number of columns
 
         int[] ans = new int[m * n];
         int i = 0, j = 0; // current position in matrix
-        
+
         for (int k = 0; k < ans.length; k++) {
             // Add current element to result
             ans[k] = mat[i][j];
@@ -48,7 +48,7 @@ public class DiagonalTraverse {
                     i--;
                     j++;
                 }
-            } 
+            }
             // Odd diagonal (i+j is odd): move down-left ↙
             else {
                 // Hit bottom edge: move right

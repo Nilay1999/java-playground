@@ -24,7 +24,7 @@ public class NumberOfLaserBeamsInBank {
         for (int i = 0; i < bank.length; i++) {
             char[] line = bank[i].toCharArray();
             int laser = 0; // count of devices ('1') in current row
-            
+
             // Count security devices in this row
             for (char c : line) {
                 if (c == '1')
@@ -34,7 +34,7 @@ public class NumberOfLaserBeamsInBank {
             if (laser > 0)
                 list.add(laser);
         }
-        
+
         // Step 2: Calculate total beams between consecutive rows with devices
         int total = 0;
         for (int i = 0; i < list.size() - 1; i++) {

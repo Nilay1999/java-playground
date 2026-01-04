@@ -23,7 +23,7 @@ public class TwoLetterCardGame {
         int n = cards.length;
         int ans = 0;
         int i = 0;
-        
+
         // Check consecutive pairs
         while (i < n - 1) {
             // Both cards must contain character x

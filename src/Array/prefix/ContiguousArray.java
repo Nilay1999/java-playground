@@ -5,7 +5,8 @@ import java.util.Map;
 
 /**
  * Contiguous Array Algorithm (Prefix Sum with HashMap):
- * Find the maximum length of contiguous subarray with equal number of 0s and 1s.
+ * Find the maximum length of contiguous subarray with equal number of 0s and
+ * 1s.
  * 
  * PROBLEM DESCRIPTION:
  * - Given binary array with 0s and 1s
@@ -26,9 +27,9 @@ import java.util.Map;
  * 
  * STEP-BY-STEP WALKTHROUGH:
  * Example: nums = [0, 1, 1, 1, 1, 0, 0, 0, 1]
- * Index:    0  1  2  3  4  5  6  7  8
- * Convert:  -1 +1 +1 +1 +1 -1 -1 -1 +1
- * Prefix:   -1 0  1  2  3  2  1  0  1
+ * Index: 0 1 2 3 4 5 6 7 8
+ * Convert: -1 +1 +1 +1 +1 -1 -1 -1 +1
+ * Prefix: -1 0 1 2 3 2 1 0 1
  * 
  * At index 1: prefix = 0, length = 1 - (-1) = 2 (subarray [0,1])
  * At index 3: prefix = 2, first seen at index 4, length = 4 - 3 = 1
@@ -46,7 +47,7 @@ public class ContiguousArray {
         Map<Integer, Integer> map = new HashMap<>();
         // Initialize: prefix sum 0 at index -1 (before array starts)
         map.put(0, -1);
-        
+
         for (int i = 0; i < nums.length; i++) {
             // Convert 0 to -1, keep 1 as +1
             if (nums[i] == 0) {
@@ -54,13 +55,13 @@ public class ContiguousArray {
             } else {
                 sum += 1;
             }
-            
+
             // If this prefix sum seen before, we found a subarray with equal 0s and 1s
             if (map.get(sum) != null) {
                 // Calculate length from first occurrence to current index
                 max = Math.max(max, i - map.get(sum));
             }
-            
+
             // Store first occurrence of this prefix sum (don't overwrite)
             if (!map.containsKey(sum)) {
                 map.put(sum, i);

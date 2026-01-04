@@ -6,7 +6,8 @@ package Array.prefix;
  * 
  * PROBLEM DESCRIPTION:
  * - Shop receives customers represented by 'Y' (yes) and 'N' (no)
- * - Penalty for closing at hour i: (count of 'Y' after i) + (count of 'N' before i)
+ * - Penalty for closing at hour i: (count of 'Y' after i) + (count of 'N'
+ * before i)
  * - Find hour that minimizes total penalty
  * 
  * ALGORITHM APPROACH:
@@ -25,10 +26,10 @@ package Array.prefix;
  * 
  * STEP-BY-STEP WALKTHROUGH:
  * Example: customers = "YYNY"
- * Index:    0  1  2  3
- * Char:     Y  Y  N  Y
- * Gain:     +1 +1 -1 +1
- * Prefix:   1  2  1  2
+ * Index: 0 1 2 3
+ * Char: Y Y N Y
+ * Gain: +1 +1 -1 +1
+ * Prefix: 1 2 1 2
  * 
  * At index 0: prefix = 1, max = 1, time = 0
  * At index 1: prefix = 2, max = 2, time = 1
@@ -41,15 +42,15 @@ package Array.prefix;
 public class MinimumPenaltyForShop {
     public int bestClosingTime(String customers) {
         int n = customers.length();
-        int prefix = 0;      // cumulative profit/loss
-        int maxProfit = 0;   // maximum profit seen so far
-        int time = 0;        // best closing time
+        int prefix = 0; // cumulative profit/loss
+        int maxProfit = 0; // maximum profit seen so far
+        int time = 0; // best closing time
 
         for (int i = 0; i < n; i++) {
             // Add gain/loss for current hour
             // 'Y' = +1 (customer served), 'N' = -1 (penalty for being open)
             prefix += customers.charAt(i) == 'Y' ? 1 : -1;
-            
+
             // If current profit is better, update best closing time
             if (prefix > maxProfit) {
                 maxProfit = prefix;

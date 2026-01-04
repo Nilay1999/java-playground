@@ -8,7 +8,7 @@ public class ValidSudoku {
      * Sudoku Validation Algorithm:
      * Use HashSet to track seen numbers with unique identifiers for:
      * - Row constraint: "number in row:i"
-     * - Column constraint: "number in col:j" 
+     * - Column constraint: "number in col:j"
      * - 3x3 box constraint: "number in sq:box_row:box_col"
      * 
      * For each non-empty cell, check if any constraint is violated.
@@ -22,7 +22,7 @@ public class ValidSudoku {
         Set<String> set = new HashSet<>();
         int row = board.length;
         int col = board[0].length;
-        
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 // Create unique identifiers for each constraint
@@ -30,7 +30,7 @@ public class ValidSudoku {
                 String colCheck = board[i][j] + "in col:" + j;
                 // Box index: (i/3, j/3) identifies which 3x3 box
                 String sqCheck = board[i][j] + "in sq:" + (i / 3) + ":" + (j / 3);
-                
+
                 // Skip empty cells
                 if (board[i][j] != '.') {
                     // Check if number violates any constraint

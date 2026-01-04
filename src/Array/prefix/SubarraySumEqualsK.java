@@ -22,23 +22,24 @@ import java.util.Map;
  * KEY INSIGHTS:
  * - If prefix_sum[i] - prefix_sum[j] = k, then subarray[j+1...i] sums to k
  * - Rearranged: if current_sum - k = previous_sum, we found a valid subarray
- * - HashMap stores frequency of prefix sums (multiple subarrays can have same sum)
+ * - HashMap stores frequency of prefix sums (multiple subarrays can have same
+ * sum)
  * - Initialize map with {0: 1} to handle subarrays starting from index 0
  * 
  * STEP-BY-STEP WALKTHROUGH:
  * Example: nums = [1, -1, 0], k = 0
  * 
  * Index 0: num = 1
- *   sum = 1, target = 1 - 0 = 1, not in map
- *   map = {0: 1, 1: 1}
+ * sum = 1, target = 1 - 0 = 1, not in map
+ * map = {0: 1, 1: 1}
  * 
  * Index 1: num = -1
- *   sum = 0, target = 0 - 0 = 0, found in map! count += 1
- *   map = {0: 2, 1: 1}
+ * sum = 0, target = 0 - 0 = 0, found in map! count += 1
+ * map = {0: 2, 1: 1}
  * 
  * Index 2: num = 0
- *   sum = 0, target = 0 - 0 = 0, found in map! count += 2
- *   map = {0: 3, 1: 1}
+ * sum = 0, target = 0 - 0 = 0, found in map! count += 2
+ * map = {0: 3, 1: 1}
  * 
  * Result: 3 subarrays with sum 0: [1,-1], [-1,0,1], [0]
  * 
@@ -48,22 +49,22 @@ public class SubarraySumEqualsK {
     public int subarraySum(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         int subarray = 0; // count of subarrays with sum k
-        int sum = 0;      // running prefix sum
-        
+        int sum = 0; // running prefix sum
+
         // Initialize: prefix sum 0 occurs once (empty subarray)
         map.put(0, 1);
-        
+
         for (int i = 0; i < nums.length; i++) {
             // Update running sum
             sum += nums[i];
-            
+
             // Check if (sum - k) exists in map
             // If yes, there are subarrays ending at i with sum k
             Integer current = map.get(sum - k);
             if (current != null) {
                 subarray += current; // add count of all such subarrays
             }
-            
+
             // Store/update frequency of current prefix sum
             map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
