@@ -1,13 +1,11 @@
-package Greedy;
-
 import java.util.HashSet;
 import java.util.Set;
 
 public class MinimumPersonToTeach {
     public static void main(String[] args) {
         int n = 3;
-        int[][] languages = {{2}, {1, 3}, {1, 2}, {3}};
-        int[][] friendships = {{1, 4}, {1, 2}, {3, 4}, {2, 3}};
+        int[][] languages = { { 2 }, { 1, 3 }, { 1, 2 }, { 3 } };
+        int[][] friendships = { { 1, 4 }, { 1, 2 }, { 3, 4 }, { 2, 3 } };
 
         System.out.println(new MinimumPersonToTeach().minimumTeachings(n, languages, friendships));
     }

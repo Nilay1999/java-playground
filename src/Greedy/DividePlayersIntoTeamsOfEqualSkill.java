@@ -1,10 +1,8 @@
-package Greedy;
-
 import java.util.Arrays;
 
 public class DividePlayersIntoTeamsOfEqualSkill {
     public static void main(String[] args) {
-        int[] skill = {1, 1, 2, 3};
+        int[] skill = { 1, 1, 2, 3 };
         // 1 2 3 3 4 5
         System.out.println(new DividePlayersIntoTeamsOfEqualSkill().dividePlayers(skill));
     }

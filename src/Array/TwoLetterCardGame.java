@@ -1,4 +1,4 @@
-package Arrays;
+package Array;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -25,7 +25,7 @@ public class TwoLetterCardGame {
     }
 
     public static void main(String[] args) {
-        String[] cards = {"aa", "ab", "ba", "ac"};
+        String[] cards = { "aa", "ab", "ba", "ac" };
         char x = 'a';
         System.out.println(new TwoLetterCardGame().score(cards, x));
     }

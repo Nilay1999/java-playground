@@ -1,5 +1,3 @@
-package Greedy;
-
 import java.util.PriorityQueue;
 
 public class MaximumAveragePassRatio {
@@ -11,7 +9,7 @@ public class MaximumAveragePassRatio {
             double pass = aClass[0];
             double total = aClass[1];
             double gain = ((pass + 1) / (total + 1)) - (pass / total);
-            maxHeap.offer(new double[]{gain, pass, total});
+            maxHeap.offer(new double[] { gain, pass, total });
         }
 
         while (extraStudents > 0) {
@@ -21,7 +19,7 @@ public class MaximumAveragePassRatio {
             double total = current[2] + 1;
 
             double newGain = ((pass + 1) / (total + 1)) - (pass / total);
-            maxHeap.offer(new double[]{newGain, pass, total});
+            maxHeap.offer(new double[] { newGain, pass, total });
             extraStudents--;
         }
 
@@ -39,7 +37,7 @@ public class MaximumAveragePassRatio {
     }
 
     public static void main(String[] args) {
-        int[][] classes = {{2, 4}, {3, 9}, {4, 5}, {2, 10}};
+        int[][] classes = { { 2, 4 }, { 3, 9 }, { 4, 5 }, { 2, 10 } };
         int extra = 4;
         System.out.println(new MaximumAveragePassRatio().maxAverageRatio(classes, extra));
     }

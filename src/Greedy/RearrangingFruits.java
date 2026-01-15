@@ -1,5 +1,3 @@
-package Greedy;
-
 import java.util.*;
 
 public class RearrangingFruits {
@@ -23,7 +21,8 @@ public class RearrangingFruits {
         }
 
         for (int value : count.values()) {
-            if (value % 2 != 0) return -1;
+            if (value % 2 != 0)
+                return -1;
         }
 
         List<Integer> extra1 = new ArrayList<>();
@@ -35,9 +34,11 @@ public class RearrangingFruits {
             int diff = c1 - c2;
 
             if (diff > 0) {
-                for (int i = 0; i < diff / 2; i++) extra1.add(key);
+                for (int i = 0; i < diff / 2; i++)
+                    extra1.add(key);
             } else if (diff < 0) {
-                for (int i = 0; i < -diff / 2; i++) extra2.add(key);
+                for (int i = 0; i < -diff / 2; i++)
+                    extra2.add(key);
             }
         }
 
@@ -55,8 +56,8 @@ public class RearrangingFruits {
     }
 
     public static void main(String args[]) {
-        int[] basket1 = {84, 80, 43, 8, 80, 88, 43, 14, 100, 88};
-        int[] basket2 = {32, 32, 42, 68, 68, 100, 42, 84, 14, 8};
+        int[] basket1 = { 84, 80, 43, 8, 80, 88, 43, 14, 100, 88 };
+        int[] basket2 = { 32, 32, 42, 68, 68, 100, 42, 84, 14, 8 };
 
         System.out.printf("Answer: %d", minCost(basket1, basket2));
     }

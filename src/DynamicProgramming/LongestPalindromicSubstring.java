@@ -1,17 +1,6 @@
 package DynamicProgramming;
 
 public class LongestPalindromicSubstring {
-    // Helper method to check if a string is a palindrome
-    private boolean isPalindromic(int left, int right, String str) {
-        while (left < right) {
-            if (str.charAt(left) != str.charAt(right)) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-        return true;
-    }
 
     // Two Pointer (Expand Around Center) approach
     public String twoPointer(String str) {
@@ -49,14 +38,73 @@ public class LongestPalindromicSubstring {
     }
 
     public String bruteforce(String str) {
-        // TODO: Implement Brute Force approach
-        return "";
+        int n = str.length();
+        int max = Integer.MIN_VALUE;
+        String ans = "";
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (isPalindromic(i, j, str)) {
+                    if (j - i + 1 > max) {
+                        max = j - i + 1;
+                        ans = str.substring(i, j + 1);
+                    }
+                }
+            }
+        }
+        return ans;
     }
 
-    // Dynamic Programming placeholder
+    private boolean isPalindromic(int left, int right, String str) {
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    // Memoization approach (Top-Down DP)
+    // memo[i][j]: 0 = not computed, 1 = palindrome, -1 = not palindrome
     public String dynamicProgramming(String str) {
-        // TODO: Implement Dynamic Programming approach
-        return "";
+        int n = str.length();
+        if (n == 0) return "";
+        
+        int[][] memo = new int[n][n];
+        int start = 0;
+        int maxLen = 1;
+        
+        // Check all substrings using memoization
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (isPalindromeMemo(str, i, j, memo) && (j - i + 1) > maxLen) {
+                    start = i;
+                    maxLen = j - i + 1;
+                }
+            }
+        }
+        
+        return str.substring(start, start + maxLen);
+    }
+    
+    private boolean isPalindromeMemo(String str, int i, int j, int[][] memo) {
+        // Base case: single char or empty
+        if (i >= j) return true;
+        
+        // Return cached result if already computed
+        if (memo[i][j] != 0) {
+            return memo[i][j] == 1;
+        }
+        
+        // Check if palindrome: chars match and inner substring is also palindrome
+        if (str.charAt(i) == str.charAt(j) && isPalindromeMemo(str, i + 1, j - 1, memo)) {
+            memo[i][j] = 1;
+            return true;
+        }
+        
+        memo[i][j] = -1;
+        return false;
     }
 
     public static void main(String[] args) {
@@ -64,4 +112,3 @@ public class LongestPalindromicSubstring {
         System.out.println(solution.twoPointer("babada"));
     }
 }
-

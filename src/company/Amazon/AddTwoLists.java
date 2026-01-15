@@ -1,4 +1,4 @@
-package LinkedList;
+package company.Amazon;
 
 public class AddTwoLists {
     static class ListNode {
@@ -18,30 +18,30 @@ public class AddTwoLists {
     public ListNode addTwoNumbers(ListNode head1, ListNode head2) {
         int carry = 0;
 
-        ListNode l1 = head1;
-        ListNode l2 = head2;
-        ListNode l = null;
+        ListNode ptr1 = head1;
+        ListNode ptr2 = head2;
+        ListNode head = new ListNode(0);
+        ListNode ptr = head;
 
-        while (l1 != null || l2 != null) {
-            int a = l1 != null ? l1.val : 0;
-            int b = l2 != null ? l2.val : 0;
+        while (ptr1 != null || ptr2 != null) {
+            int val1 = ptr1 != null ? ptr1.val : 0;
+            int val2 = ptr2 != null ? ptr2.val : 0;
 
-            int total = a + b + carry;
-            if (total > 9) {
-                total = total % 10;
-                carry = 1;
-            }
+            int total = val1 + val2 + carry;
+            carry = total > 9 ? 1 : 0;
 
-            l = new ListNode(1, null);
-            l1 = l1.next;
-            l2 = l2.next;
+            ptr.next = new ListNode(total % 10, null);
+
+            ptr = ptr.next;
+            ptr1 = ptr1 != null ? ptr1.next : null;
+            ptr2 = ptr2 != null ? ptr2.next : null;
         }
 
-        if (carry > 1) {
-            l.next = new ListNode(carry);
+        if (carry > 0) {
+            ptr.next = new ListNode(1);
         }
 
-        return l;
+        return head;
     }
 
     public static void main(String[] args) {

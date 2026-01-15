@@ -1,4 +1,4 @@
-package Arrays;
+package Array;
 
 public class DecodeTheSlantedCiphertext {
     public String decodeCiphertext(String encodedText, int rows) {

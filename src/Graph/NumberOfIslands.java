@@ -1,5 +1,8 @@
 package Graph;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class NumberOfIslands {
     public int numIslands(char[][] grid) {
         int n = grid.length;
@@ -33,6 +36,30 @@ public class NumberOfIslands {
             }
         }
         return;
+    }
+
+    private void bfs(char[][] grid, boolean[][] visited, int row, int col, int[][] directions) {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[] { row, col });
+        visited[row][col] = true;
+
+        while (!queue.isEmpty()) {
+            int[] point = queue.poll();
+
+            for (int[] dir : directions) {
+                int newX = point[0] + dir[0];
+                int newY = point[1] + dir[1];
+
+                if (newX >= 0 && newX < grid.length &&
+                        newY >= 0 && newY < grid[0].length &&
+                        !visited[newX][newY] &&
+                        grid[newX][newY] == '1') {
+
+                    visited[newX][newY] = true;
+                    queue.offer(new int[] { newX, newY });
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
