@@ -6,6 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 public class LetterCombinationOfPhoneNumber {
+    /**
+     * Phone Number Letter Combinations Algorithm (Backtracking):
+     * Generate all possible letter combinations from phone keypad digits.
+     * 
+     * Phone mapping: 2→abc, 3→def, 4→ghi, 5→jkl, 6→mno, 7→pqrs, 8→tuv, 9→wxyz
+     * 
+     * Backtracking Strategy:
+     * 1. For each digit, try all possible letters
+     * 2. Recursively build combinations for remaining digits
+     * 3. Base case: processed all digits → add combination to result
+     * 4. Backtrack: remove last character and try next option
+     * 
+     * Example: "23" → ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+     * 
+     * Time: O(3^N × 4^M) where N=digits with 3 letters, M=digits with 4 letters
+     * Space: O(3^N × 4^M) for storing results
+     */
     private static final Map<Integer, String> MAP = new HashMap<>();
 
     static {

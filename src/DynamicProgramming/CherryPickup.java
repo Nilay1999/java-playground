@@ -1,5 +1,32 @@
 package DynamicProgramming;
 
+/**
+ * Cherry Pickup Algorithm (3D DP):
+ * Two people start from (0,0) and reach (n-1,m-1), collect maximum cherries.
+ * Can only move right or down. After pickup, cell becomes 0.
+ * 
+ * KEY INSIGHT: Instead of two separate trips, simulate both people moving simultaneously.
+ * This avoids the complexity of tracking grid state changes.
+ * 
+ * STATE REPRESENTATION:
+ * dp[i1][j1][i2] = max cherries when person1 at (i1,j1) and person2 at (i2,j2)
+ * where j2 = i1 + j1 - i2 (both people take same number of steps)
+ * 
+ * ALGORITHM:
+ * 1. Both people start at (0,0) simultaneously
+ * 2. At each step, try all 4 combinations of moves:
+ *    - Person1: right/down, Person2: right/down
+ * 3. Collect cherries from both positions (avoid double counting if same cell)
+ * 4. Use memoization to avoid recalculating subproblems
+ * 5. Handle obstacles (-1 cells) by returning invalid result
+ * 
+ * OPTIMIZATION: j2 = i1 + j1 - i2 reduces 4D to 3D DP
+ * 
+ * Example: [[0,1,-1],[1,0,-1],[1,1,1]]
+ * Optimal path: Person1 and Person2 take different routes to collect all cherries
+ * 
+ * Time: O(n³), Space: O(n³)
+ */
 public class CherryPickup {
 
     public static int cherryPickup(int[][] grid) {

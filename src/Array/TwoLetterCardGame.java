@@ -4,6 +4,19 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class TwoLetterCardGame {
+    /**
+     * Two Letter Card Game Scoring Algorithm:
+     * 1. Sort cards by first character for easier processing
+     * 2. Check consecutive pairs that both contain character x
+     * 3. Score +1 if cards differ in exactly one position (XOR logic)
+     * 4. Skip both cards when scoring to avoid reuse
+     * 
+     * Example: cards=["aa","ab","ba","ac"], x='a'
+     * After sort: ["aa","ab","ac","ba"]
+     * Pairs: (aa,ab) - differ in pos 1 only → +1 point
+     * 
+     * Time: O(n log n) for sorting, Space: O(1)
+     */
     public int score(String[] cards, char x) {
         Arrays.sort(cards, Comparator.comparing(s -> s.charAt(0)));
         int n = cards.length;

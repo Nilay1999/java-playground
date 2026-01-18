@@ -2,6 +2,55 @@ package Design;
 
 import java.util.*;
 
+/**
+ * Router Packet Management System Design:
+ * Manage packet queue with memory limit, forward packets, and query statistics.
+ * 
+ * DATA STRUCTURES:
+ * 1. packetQueue: Deque<int[]>
+ *    - FIFO queue for packets (source, destination, timestamp)
+ * 2. uniquePackets: Set<String>
+ *    - Prevent duplicate packets (key = source#destination#timestamp)
+ * 3. destinationTimestamps: Map<destination, List<timestamp>>
+ *    - Track all timestamps for each destination
+ * 4. processedCount: Map<destination, count>
+ *    - Track how many packets processed for each destination
+ * 
+ * ALGORITHM:
+ * 
+ * addPacket(source, destination, timestamp):
+ * - Check if packet already exists (return false if duplicate)
+ * - If queue full: forward oldest packet
+ * - Add new packet to queue
+ * - Record timestamp for destination
+ * 
+ * forwardPacket():
+ * - Remove oldest packet from queue (FIFO)
+ * - Remove from uniquePackets set
+ * - Increment processedCount for destination
+ * - Return packet details
+ * 
+ * getCount(destination, startTime, endTime):
+ * - Get all timestamps for destination
+ * - Skip already processed packets (using processedCount)
+ * - Binary search for timestamps in [startTime, endTime]
+ * - Return count of packets in range
+ * 
+ * BINARY SEARCH OPTIMIZATION:
+ * - lowerBound: find first timestamp >= startTime
+ * - upperBound: find first timestamp > endTime
+ * - Count = upperBound - lowerBound
+ * 
+ * Example: memoryLimit=3
+ * addPacket(1,1,1): queue=[(1,1,1)], unique={(1,1,1)}
+ * addPacket(1,2,2): queue=[(1,1,1),(1,2,2)], unique={(1,1,1),(1,2,2)}
+ * addPacket(1,3,3): queue=[(1,1,1),(1,2,2),(1,3,3)], unique={(1,1,1),(1,2,2),(1,3,3)}
+ * addPacket(1,4,4): queue full, forward (1,1,1)
+ *                   queue=[(1,2,2),(1,3,3),(1,4,4)]
+ * 
+ * Time: O(1) add/forward, O(log n) getCount
+ * Space: O(n)
+ */
 class Router {
     private final int memoryLimit;
     private final Deque<int[]> packetQueue;

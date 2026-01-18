@@ -3,6 +3,27 @@ package Stack;
 import java.util.Stack;
 
 public class LargestAreaOfHistogram {
+    /**
+     * Largest Rectangle in Histogram Algorithm (Monotonic Stack):
+     * Find the largest rectangular area in a histogram.
+     * 
+     * KEY INSIGHT: For each bar, find the largest rectangle with that bar as the shortest.
+     * Rectangle width = (next_smaller_index - prev_smaller_index - 1)
+     * Rectangle area = height[i] × width
+     * 
+     * APPROACH 1 - Two Pass:
+     * 1. Find previous smaller element index for each bar
+     * 2. Find next smaller element index for each bar  
+     * 3. Calculate area for each bar and track maximum
+     * 
+     * APPROACH 2 - Single Pass Optimized:
+     * Use monotonic increasing stack. When current bar is smaller:
+     * - Pop taller bars and calculate their areas
+     * - Current bar becomes their "next smaller"
+     * - Top of stack becomes their "previous smaller"
+     * 
+     * Time: O(n), Space: O(n) for stack
+     */
     // Next smaller Element (index)
     private static int[] nextSmaller(int[] heights) {
         Stack<Integer> stack = new Stack<>();

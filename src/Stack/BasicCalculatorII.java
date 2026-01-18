@@ -2,6 +2,38 @@ package Stack;
 
 import java.util.Stack;
 
+/**
+ * Basic Calculator II Algorithm (Stack for Operator Precedence):
+ * Evaluate expression with +, -, *, / operators (no parentheses).
+ * 
+ * KEY INSIGHT: Handle operator precedence using stack:
+ * - +, -: Push to stack (defer calculation)
+ * - *, /: Calculate immediately with stack top
+ * 
+ * ALGORITHM:
+ * 1. Process expression character by character
+ * 2. Build numbers digit by digit
+ * 3. When encountering operator (or end of string):
+ *    - Apply previous operator with current number
+ *    - +: push positive number to stack
+ *    - -: push negative number to stack  
+ *    - *: pop stack, multiply, push result
+ *    - /: pop stack, divide, push result
+ * 4. Sum all values in stack for final result
+ * 
+ * WHY THIS WORKS:
+ * - Stack handles addition/subtraction naturally
+ * - Multiplication/division processed immediately (higher precedence)
+ * - No need to worry about operator precedence parsing
+ * 
+ * Example: "3+5*2-1"
+ * - 3: prev='+' → stack=[3]
+ * - 5: prev='*' → pop 3, push 3*5=15 → stack=[15]  
+ * - 2: prev='-' → stack=[15, -2]
+ * - End: sum = 15 + (-2) = 13
+ * 
+ * Time: O(n), Space: O(n)
+ */
 public class BasicCalculatorII {
     public static int calculate(String s) {
         Stack<Integer> stack = new Stack<>();

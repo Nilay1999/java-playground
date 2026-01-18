@@ -1,6 +1,25 @@
 package DynamicProgramming;
 
 public class EditDistance {
+    /**
+     * Edit Distance Algorithm (Levenshtein Distance):
+     * Find minimum operations to transform word1 into word2.
+     * Operations: insert, delete, replace
+     * 
+     * DP State: dp[i][j] = min operations to transform word2[0..i-1] to word1[0..j-1]
+     * 
+     * Recurrence:
+     * - If chars match: dp[i][j] = dp[i-1][j-1] (no operation needed)
+     * - Else: dp[i][j] = 1 + min(
+     *     dp[i-1][j],     // delete from word2
+     *     dp[i][j-1],     // insert into word2  
+     *     dp[i-1][j-1]    // replace in word2
+     *   )
+     * 
+     * Base cases: dp[i][0] = i (delete all), dp[0][j] = j (insert all)
+     * 
+     * Time: O(m×n), Space: O(m×n)
+     */
     public static int minDistance(String word1, String word2) {
         int n = word1.length();
         int m = word2.length();

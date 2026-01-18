@@ -3,6 +3,27 @@ package Array;
 import java.util.Arrays;
 
 public class DiagonalTraverse {
+    /**
+     * Matrix Diagonal Traversal Algorithm:
+     * Traverse matrix diagonally, alternating direction on each diagonal.
+     * 
+     * Pattern:
+     * - Even diagonals (i+j even): go up-right ↗
+     * - Odd diagonals (i+j odd): go down-left ↙
+     * 
+     * Boundary handling:
+     * - Up-right: hit top edge → move right, hit right edge → move down
+     * - Down-left: hit bottom edge → move right, hit left edge → move down
+     * 
+     * Visual for 3x3:
+     * 1 → 2   4
+     * ↓   ↗ ↙ ↑
+     * 3   5   7
+     * ↓ ↙   ↗ ↑
+     * 6 ← 8   9
+     * 
+     * Time: O(m*n), Space: O(1) excluding output
+     */
     public int[] findDiagonalOrder(int[][] mat) {
         int n = mat.length;
         int m = mat[0].length;

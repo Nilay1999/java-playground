@@ -1,5 +1,31 @@
 package LinkedList;
 
+/**
+ * Doubly Linked List Data Structure:
+ * Linear data structure where each node contains data and two pointers (prev, next).
+ * 
+ * ADVANTAGES OVER SINGLY LINKED LIST:
+ * - Bidirectional traversal (forward and backward)
+ * - O(1) deletion when node reference is given
+ * - Better for implementing deque, LRU cache
+ * 
+ * OPERATIONS & TIME COMPLEXITY:
+ * - Insert at beginning/end: O(1)
+ * - Insert at position: O(n) - need to traverse
+ * - Delete from beginning/end: O(1)
+ * - Delete by value: O(n) - need to search
+ * - Search: O(n)
+ * - Access by index: O(n)
+ * 
+ * MEMORY: Each node uses extra space for prev pointer
+ * 
+ * STRUCTURE:
+ * [prev|data|next] ←→ [prev|data|next] ←→ [prev|data|next]
+ *        ↑                                        ↑
+ *      head                                     tail
+ * 
+ * Space: O(n), where n is number of nodes
+ */
 public class DoublyLinkedList {
 
     private static class Node {

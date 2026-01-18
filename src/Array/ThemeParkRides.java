@@ -1,6 +1,19 @@
 package Array;
 
 public class ThemeParkRides {
+    /**
+     * Theme Park Ride Scheduling Algorithm:
+     * Find minimum time to complete one land ride and one water ride.
+     * 
+     * Strategy: Try all combinations of (land_ride, water_ride) in both orders:
+     * 1. Land first, then water: wait for water start time if needed
+     * 2. Water first, then land: wait for land start time if needed
+     * 
+     * For each combination, calculate finish time and track minimum.
+     * 
+     * Time: O(n*m) where n=land rides, m=water rides
+     * Space: O(1)
+     */
 
     public static int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime,
             int[] waterDuration) {

@@ -5,6 +5,56 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+/**
+ * Food Ratings System Design:
+ * Support changing food ratings and querying highest-rated food in cuisine.
+ * 
+ * DATA STRUCTURES:
+ * 1. cuisineQueue: Map<cuisine, PriorityQueue<Food>>
+ *    - Max heap for each cuisine (by rating, then alphabetically)
+ * 2. foodToRating: Map<food, rating>
+ *    - Track current rating of each food
+ * 3. foodToCuisine: Map<food, cuisine>
+ *    - Track which cuisine each food belongs to
+ * 
+ * ALGORITHM:
+ * 
+ * changeRating(food, newRating):
+ * - Update foodToRating with new rating
+ * - Add new Food object to cuisine's heap (don't remove old)
+ * - Lazy deletion: old entries become invalid
+ * 
+ * highestRated(cuisine):
+ * - Poll from heap until finding valid entry
+ * - Valid = current rating matches heap entry rating
+ * - Return food name of valid entry
+ * 
+ * LAZY DELETION OPTIMIZATION:
+ * - Don't remove old entries from heap
+ * - When querying, skip invalid entries
+ * - Reduces deletion overhead from O(n) to O(1)
+ * 
+ * COMPARATOR:
+ * - Primary: higher rating first (descending)
+ * - Secondary: lexicographically smaller name
+ * 
+ * Example: foods=["kimchi","miso","sushi","moussaka","isukaki"]
+ *          cuisines=["korean","japanese","japanese","greek","japanese"]
+ *          ratings=[9,12,8,16,7]
+ * 
+ * changeRating("sushi", 16):
+ * - foodToRating["sushi"] = 16
+ * - Add Food("sushi", "japanese", 16) to japanese heap
+ * 
+ * highestRated("japanese"):
+ * - Heap top might be old Food("sushi", "japanese", 8)
+ * - Check: foodToRating["sushi"] = 16 ≠ 8 → invalid, poll
+ * - Next: Food("miso", "japanese", 12)
+ * - Check: foodToRating["miso"] = 12 = 12 → valid, return "miso"
+ * 
+ * Time: O(1) add, O(log n) change/query
+ * Space: O(n)
+ */
 class FoodRatings {
     private final Map<String, PriorityQueue<Food>> cuisineQueue;
     private final Map<String, Integer> foodToRating;

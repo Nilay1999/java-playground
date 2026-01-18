@@ -2,6 +2,57 @@ package Design;
 
 import java.util.*;
 
+/**
+ * Task Manager System Design:
+ * Manage tasks with priorities, support add/edit/remove/execute operations.
+ * 
+ * DATA STRUCTURES:
+ * 1. taskMap: Map<taskId, [userId, priority]>
+ *    - Track current state of each task
+ * 2. maxHeap: PriorityQueue<[priority, taskId]>
+ *    - Max heap by priority (then by taskId)
+ *    - Allows lazy deletion
+ * 
+ * ALGORITHM:
+ * 
+ * add(userId, taskId, priority):
+ * - Store task info in taskMap
+ * - Add to max heap
+ * 
+ * edit(taskId, newPriority):
+ * - Update priority in taskMap
+ * - Add new entry to heap (don't remove old)
+ * - Lazy deletion: old entries become invalid
+ * 
+ * rmv(taskId):
+ * - Remove from taskMap
+ * - Don't remove from heap (lazy deletion)
+ * 
+ * execTop():
+ * - Poll from heap until finding valid task
+ * - Valid = task exists in taskMap with matching priority
+ * - Remove from taskMap and return userId
+ * - Skip invalid entries (removed or priority changed)
+ * 
+ * LAZY DELETION OPTIMIZATION:
+ * - Don't immediately remove from heap
+ * - When executing, validate against taskMap
+ * - Reduces deletion overhead from O(n) to O(1)
+ * 
+ * COMPARATOR:
+ * - Primary: higher priority first (descending)
+ * - Secondary: higher taskId first (descending)
+ * 
+ * Example:
+ * add(1, 1, 5): taskMap={1:[1,5]}, heap=[[5,1]]
+ * add(2, 2, 4): taskMap={1:[1,5], 2:[2,4]}, heap=[[5,1],[4,2]]
+ * edit(1, 3): taskMap={1:[1,3], 2:[2,4]}, heap=[[5,1],[4,2],[3,1]]
+ * execTop(): poll [5,1], invalid (priority 5≠3), poll [4,2], valid
+ *            return 2, taskMap={1:[1,3]}
+ * 
+ * Time: O(log n) add/edit/execTop, O(1) rmv
+ * Space: O(n)
+ */
 class TaskManager {
     private Map<Integer, int[]> taskMap;
     private PriorityQueue<int[]> maxHeap;

@@ -1,5 +1,35 @@
 package Graph;
 
+/**
+ * Battleships in Board Algorithm (Connected Components with DFS):
+ * Count number of battleships on board. Battleships are connected 'X' cells.
+ * 
+ * PROBLEM INTERPRETATION: Count connected components of 'X' cells.
+ * Each battleship is a connected group of 'X' cells (horizontally or vertically).
+ * 
+ * DFS APPROACH:
+ * 1. Iterate through each cell in the board
+ * 2. When finding unvisited 'X', start DFS to mark entire battleship
+ * 3. DFS explores all connected 'X' cells (4-directional)
+ * 4. Increment battleship count for each new connected component
+ * 
+ * ALGORITHM:
+ * 1. For each cell (i,j):
+ *    - If board[i][j] == 'X' and not visited: found new battleship
+ *    - Run DFS to mark all connected 'X' cells as visited
+ *    - Increment total count
+ * 2. DFS marks current cell visited and recursively visits neighbors
+ * 
+ * OPTIMIZATION: Can solve in O(1) space by only counting top-left corners
+ * of battleships (cells with no 'X' above or to the left).
+ * 
+ * Example: [['X','X','.','X'],['.','.','.','X'],['.','.','.','X']]
+ * Battleship 1: Connected 'X' at (0,0)-(0,1)
+ * Battleship 2: Connected 'X' at (0,3)-(1,3)-(2,3)
+ * Total: 2 battleships
+ * 
+ * Time: O(n*m), Space: O(n*m) for visited array
+ */
 public class BattleshipsInBoard {
     public int countBattleships(char[][] board) {
         int total = 0;

@@ -1,6 +1,20 @@
 package DynamicProgramming;
 
 public class KnapSack {
+    /**
+     * 0/1 Knapsack Algorithm (Memoization):
+     * Find maximum profit with weight constraint, each item used at most once.
+     * 
+     * State: memo[index][capacity] = max profit using items 0..index with given capacity
+     * 
+     * Recurrence:
+     * - If weight[i] > capacity: skip item → memo[i-1][capacity]
+     * - Else: max(take item + memo[i-1][capacity-weight[i]], skip item)
+     * 
+     * Base case: index=0 or capacity=0 → profit=0
+     * 
+     * Time: O(n × capacity), Space: O(n × capacity)
+     */
 
     private int dfs(Integer[][] memo, int[] profit, int[] weight, int capacity, int idx) {
         if (capacity == 0 || idx == 0) {

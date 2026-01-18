@@ -4,6 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSchedule {
+    /**
+     * Course Schedule Algorithm (Cycle Detection in Directed Graph):
+     * Determine if all courses can be finished given prerequisites.
+     * 
+     * Key insight: If prerequisite graph has a cycle, impossible to finish all courses.
+     * 
+     * Cycle Detection using DFS:
+     * - visited[]: node has been processed completely
+     * - inRecursion[]: node is in current DFS path (recursion stack)
+     * - If we reach a node already in recursion stack → cycle found
+     * 
+     * States: WHITE (unvisited) → GRAY (in recursion) → BLACK (visited)
+     * 
+     * Time: O(V + E), Space: O(V) for recursion and arrays
+     */
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<List<Integer>> adjList = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {

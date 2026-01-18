@@ -4,6 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DFSInGraph {
+    /**
+     * Depth-First Search (DFS) Algorithm:
+     * Explore graph by going as deep as possible before backtracking.
+     * 
+     * Algorithm:
+     * 1. Start from source node, mark as visited and add to result
+     * 2. For each unvisited neighbor: recursively call DFS
+     * 3. Backtrack when no more unvisited neighbors
+     * 
+     * Applications: Cycle detection, connected components, topological sort
+     * 
+     * Time: O(V + E), Space: O(V) for recursion stack and visited array
+     */
 
     public void addEdge(List<List<Integer>> adj, int source, int dest) {
         adj.get(source).add(dest);

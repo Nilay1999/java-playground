@@ -2,6 +2,49 @@ package Stack;
 
 import java.util.Stack;
 
+/**
+ * Longest Valid Parentheses Algorithm:
+ * Find length of longest valid (well-formed) parentheses substring.
+ * 
+ * TWO APPROACHES:
+ * 
+ * 1. STACK APPROACH:
+ *    - Push -1 initially as base
+ *    - For '(': push index
+ *    - For ')': pop and calculate length = i - stack.peek()
+ *    - If stack becomes empty after pop, push current index as new base
+ * 
+ * 2. TWO-PASS COUNTER APPROACH:
+ *    - Left-to-right pass: count '(' and ')'
+ *      When left == right: valid substring found
+ *      When right > left: reset counters
+ *    - Right-to-left pass: count ')' and '('
+ *      When left == right: valid substring found
+ *      When left > right: reset counters
+ *    - Return maximum from both passes
+ * 
+ * STACK ALGORITHM DETAILS:
+ * - Stack stores indices of unmatched parentheses
+ * - When ')' matches '(': pop and calculate valid length
+ * - If stack empty after pop: push ')' index as new base
+ * 
+ * Example: "(()" 
+ * i=0 '(': push 0 → [-1,0]
+ * i=1 '(': push 1 → [-1,0,1]
+ * i=2 ')': pop 1, length = 2-0 = 2 → [-1,0]
+ * Result: 2
+ * 
+ * Example: ")()())"
+ * i=0 ')': pop -1, push 0 → [0]
+ * i=1 '(': push 1 → [0,1]
+ * i=2 ')': pop 1, length = 2-0 = 2 → [0]
+ * i=3 '(': push 3 → [0,3]
+ * i=4 ')': pop 3, length = 4-0 = 4 → [0]
+ * i=5 ')': pop 0, push 5 → [5]
+ * Result: 4
+ * 
+ * Time: O(n), Space: O(n) for stack
+ */
 public class LongestValidBraces {
     private static Stack<Integer> stack;
 

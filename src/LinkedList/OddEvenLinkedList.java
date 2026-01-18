@@ -1,5 +1,27 @@
 package LinkedList;
 
+/**
+ * Odd Even Linked List Algorithm:
+ * Rearrange linked list so all odd-positioned nodes come first, then even-positioned nodes.
+ * 
+ * ALGORITHM:
+ * 1. Keep two pointers: odd (starts at head) and even (starts at head.next)
+ * 2. Save even head to connect later
+ * 3. Traverse and relink:
+ *    - odd.next = even.next (skip even node)
+ *    - even.next = even.next.next (skip odd node)
+ *    - Move both pointers forward
+ * 4. Connect odd tail to even head
+ * 
+ * KEY INSIGHT: Maintain two separate chains (odd and even) then merge
+ * 
+ * Example: 1→2→3→4→5
+ * Step 1: odd=1, even=2, evenHead=2
+ * Step 2: 1→3, 2→4 (odd chain: 1→3→5, even chain: 2→4)
+ * Step 3: Connect: 1→3→5→2→4
+ * 
+ * Time: O(n), Space: O(1) - only rearranging pointers
+ */
 public class OddEvenLinkedList {
     static class ListNode {
         int val;

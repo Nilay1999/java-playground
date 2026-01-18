@@ -1,6 +1,21 @@
 package DynamicProgramming;
 
 public class LongestIncreasingPathInMatrix {
+    /**
+     * Longest Increasing Path in Matrix Algorithm (DFS + Memoization):
+     * Find the longest strictly increasing path in a 2D matrix.
+     * 
+     * Strategy:
+     * 1. Try starting from each cell using DFS
+     * 2. From each cell, explore 4 directions if next cell value > current
+     * 3. Use memoization to avoid recomputing paths from same cell
+     * 4. memo[i][j] = longest path starting from cell (i,j)
+     * 
+     * Key insight: Since path must be strictly increasing, no cycles possible
+     * → Safe to use memoization without visited array
+     * 
+     * Time: O(m×n) - each cell computed once, Space: O(m×n) for memoization
+     */
     public static void main(String[] args) {
         int[][] matrix = { { 9, 9, 4 }, { 6, 6, 8 }, { 2, 1, 1 } };
         System.out.println(new LongestIncreasingPathInMatrix().longestIncreasingPath(matrix));

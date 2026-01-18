@@ -6,6 +6,21 @@ import java.util.List;
 import java.util.Queue;
 
 class BFSInGraph {
+    /**
+     * Breadth-First Search (BFS) Algorithm:
+     * Explore graph level by level using a queue.
+     * 
+     * Algorithm:
+     * 1. Start from source node (0), add to queue and mark visited
+     * 2. While queue not empty:
+     *    - Dequeue node and add to result
+     *    - For each unvisited neighbor: mark visited and enqueue
+     * 3. Process nodes in order of distance from source
+     * 
+     * Applications: Shortest path in unweighted graph, level-order traversal
+     * 
+     * Time: O(V + E), Space: O(V) for queue and visited array
+     */
 
     public List<Integer> bfs(List<List<Integer>> adList, int vertices) {
         List<Integer> result = new ArrayList<>();

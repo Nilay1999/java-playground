@@ -3,6 +3,20 @@ package DynamicProgramming;
 import java.util.Arrays;
 
 public class CoinChange {
+    /**
+     * Coin Change Algorithm - Find minimum coins to make amount:
+     * 
+     * BOTTOM-UP TABULATION APPROACH:
+     * dp[i] = minimum coins needed to make amount i
+     * For each coin, update all amounts that can be formed
+     * dp[i] = min(dp[i], dp[i-coin] + 1)
+     * 
+     * TOP-DOWN MEMOIZATION APPROACH:
+     * For each coin, decide to take it (unlimited times) or skip it
+     * memo[amount][index] = minimum coins for amount starting from index
+     * 
+     * Time: O(amount × coins), Space: O(amount)
+     */
 
     // Bottom-Up Tabulation
     public static int coinChange(int[] coins, int amount) {

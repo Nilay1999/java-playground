@@ -3,6 +3,25 @@ package Graph;
 import java.util.*;
 
 public class TopologicalSort {
+    /**
+     * Topological Sort Algorithms:
+     * Linear ordering of vertices in DAG such that for every edge u→v, u comes before v.
+     * 
+     * METHOD 1 - KAHN'S ALGORITHM (BFS):
+     * 1. Calculate in-degree for all vertices
+     * 2. Add vertices with in-degree 0 to queue
+     * 3. Process queue: remove vertex, decrease neighbors' in-degree
+     * 4. Add vertices with in-degree 0 to queue
+     * 
+     * METHOD 2 - DFS APPROACH:
+     * 1. Perform DFS from each unvisited vertex
+     * 2. After processing all neighbors, push vertex to stack
+     * 3. Pop stack to get topological order
+     * 
+     * Applications: Course scheduling, build systems, dependency resolution
+     * 
+     * Time: O(V + E), Space: O(V)
+     */
 
     public static void main(String[] args) {
         int n = 6;

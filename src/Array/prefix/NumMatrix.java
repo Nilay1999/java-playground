@@ -1,5 +1,46 @@
 package Array.prefix;
 
+/**
+ * 2D Prefix Sum Algorithm (Range Sum Query):
+ * Efficiently compute sum of elements in any rectangular region of a matrix.
+ * 
+ * PROBLEM DESCRIPTION:
+ * - Given a 2D matrix, support multiple range sum queries
+ * - Query: sum of all elements in rectangle from (row1, col1) to (row2, col2)
+ * - Optimize for multiple queries (precomputation is key)
+ * 
+ * ALGORITHM APPROACH:
+ * 1. Build 2D prefix sum array during initialization
+ * 2. prefix[i][j] = sum of all elements in rectangle from (0,0) to (i-1,j-1)
+ * 3. Use inclusion-exclusion principle for range queries
+ * 4. Formula: prefix[i][j] = matrix[i-1][j-1] + prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]
+ * 
+ * KEY INSIGHTS:
+ * - 2D prefix sum uses 1-indexed array to avoid boundary checks
+ * - Inclusion-exclusion: add diagonal, subtract overlaps
+ * - Range sum formula: prefix[r2+1][c2+1] - prefix[r2+1][c1] - prefix[r1][c2+1] + prefix[r1][c1]
+ * - Precomputation trades space for query speed
+ * 
+ * STEP-BY-STEP WALKTHROUGH:
+ * Example matrix:
+ * [3, 0, 1]
+ * [5, 6, 3]
+ * [1, 2, 0]
+ * 
+ * Prefix array (1-indexed):
+ * [0, 0, 0, 0]
+ * [0, 3, 3, 4]
+ * [0, 8, 14, 18]
+ * [0, 9, 17, 24]
+ * 
+ * Query sum from (1,1) to (2,2):
+ * = prefix[3][3] - prefix[3][1] - prefix[1][3] + prefix[1][1]
+ * = 24 - 9 - 4 + 0 = 11
+ * (Elements: 6 + 3 + 2 + 0 = 11)
+ * 
+ * Time: O(n*m) preprocessing, O(1) per query
+ * Space: O(n*m) for prefix array
+ */
 public class NumMatrix {
     private int[][] prefix;
 

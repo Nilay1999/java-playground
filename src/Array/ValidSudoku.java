@@ -4,6 +4,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ValidSudoku {
+    /**
+     * Sudoku Validation Algorithm:
+     * Use HashSet to track seen numbers with unique identifiers for:
+     * - Row constraint: "number in row:i"
+     * - Column constraint: "number in col:j" 
+     * - 3x3 box constraint: "number in sq:box_row:box_col"
+     * 
+     * For each non-empty cell, check if any constraint is violated.
+     * Box index calculated as (i/3, j/3) for 9x9 grid.
+     * 
+     * Time: O(1) - fixed 9x9 grid, Space: O(1) - at most 243 entries in set
+     */
 
     public boolean isValidSudoku(char[][] board) {
         Set<String> set = new HashSet<>();

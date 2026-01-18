@@ -2,6 +2,55 @@ package Stack;
 
 import java.util.Stack;
 
+/**
+ * Infix to Postfix Conversion Algorithm (Shunting Yard):
+ * Convert infix expression (a+b*c) to postfix (abc*+).
+ * 
+ * POSTFIX NOTATION BENEFITS:
+ * - No parentheses needed
+ * - Unambiguous evaluation
+ * - Easy to evaluate with stack
+ * 
+ * ALGORITHM (Shunting Yard):
+ * 1. Scan infix expression left to right
+ * 2. If operand: add to output
+ * 3. If '(': push to stack
+ * 4. If ')': pop operators until '(' found
+ * 5. If operator:
+ *    - While stack not empty AND top has higher/equal precedence:
+ *      - Pop to output
+ *    - Push current operator
+ * 6. After scanning: pop all remaining operators to output
+ * 
+ * OPERATOR PRECEDENCE:
+ * - ^ (exponent): 3
+ * - *, /: 2
+ * - +, -: 1
+ * 
+ * ASSOCIATIVITY:
+ * - Left-associative: +, -, *, /
+ * - Right-associative: ^
+ * 
+ * Example: "a+b*c"
+ * 
+ * 'a': output="a"
+ * '+': stack=[+]
+ * 'b': output="ab"
+ * '*': * has higher precedence than +, stack=[+,*]
+ * 'c': output="abc"
+ * End: pop all, output="abc*+"
+ * 
+ * Example: "a+b*(c^d-e)^(f+g*h)-i"
+ * 
+ * Handles parentheses by pushing '(' and popping until matching ')'
+ * 
+ * POSTFIX TO INFIX CONVERSION:
+ * - Traverse postfix right to left
+ * - If operand: push to stack
+ * - If operator: pop two operands, create infix expression, push back
+ * 
+ * Time: O(n), Space: O(n)
+ */
 public class InfixToPostfix {
 
     static boolean isOperator(char x) {

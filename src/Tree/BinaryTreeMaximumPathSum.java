@@ -2,6 +2,33 @@ package Tree;
 
 import Tree.BinaryTreeBuilder.TreeNode;
 
+/**
+ * Binary Tree Maximum Path Sum Algorithm:
+ * Find the maximum sum of any path in binary tree (path = sequence of connected nodes).
+ * 
+ * KEY INSIGHTS:
+ * 1. Path can start and end at any nodes (not necessarily root to leaf)
+ * 2. For each node, consider it as the "peak" of a path
+ * 3. Path through a node = left_max + node.val + right_max
+ * 4. But return value should be single branch (not both branches)
+ * 
+ * DFS ALGORITHM:
+ * 1. For each node, calculate max path sum ending at that node
+ * 2. Consider two cases:
+ *    - Path through current node (left + node + right) → update global max
+ *    - Path ending at current node (max(left, right) + node) → return to parent
+ * 3. Use Math.max(0, childSum) to ignore negative paths
+ * 
+ * Example: Tree [1,2,3]
+ *     1
+ *    / \
+ *   2   3
+ * 
+ * Paths: [1], [2], [3], [2,1], [1,3], [2,1,3]
+ * Maximum: 2+1+3 = 6
+ * 
+ * Time: O(n), Space: O(h) where h is height
+ */
 public class BinaryTreeMaximumPathSum {
     int answer = Integer.MIN_VALUE;
 

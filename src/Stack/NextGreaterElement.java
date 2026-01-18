@@ -4,6 +4,26 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public class NextGreaterElement {
+    /**
+     * Next Greater Element Algorithms (Monotonic Stack):
+     * 
+     * PROBLEM I: Find next greater element for subset in another array
+     * 1. Build next greater mapping for main array using monotonic stack
+     * 2. Use mapping to answer queries for subset
+     * 
+     * PROBLEM II: Circular array - next greater element with wraparound
+     * 1. Process array twice (2n iterations) to simulate circular behavior
+     * 2. Use modulo to wrap indices: arr[i % n]
+     * 3. Only store results in first n iterations
+     * 
+     * MONOTONIC STACK PATTERN:
+     * - Traverse right to left
+     * - Pop smaller/equal elements (maintain decreasing stack)
+     * - Top of stack = next greater element
+     * - Push current element
+     * 
+     * Time: O(n), Space: O(n)
+     */
 
     public static int[] nextGreaterElementI(int[] subarr, int[] arr) {
         Stack<Integer> stack = new Stack<>();

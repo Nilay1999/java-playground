@@ -3,6 +3,26 @@ package Stack;
 import java.util.Stack;
 
 public class BasicCalculator {
+    /**
+     * Basic Calculator Algorithm (Stack for Parentheses):
+     * Evaluate mathematical expression with +, -, (, ), and spaces.
+     * 
+     * ALGORITHM:
+     * 1. Process character by character
+     * 2. Build numbers digit by digit
+     * 3. Apply operations immediately when encountering +/-
+     * 4. Handle parentheses with stack:
+     *    - '(': Push current result and sign to stack, reset for sub-expression
+     *    - ')': Complete sub-expression, pop sign and previous result, combine
+     * 
+     * STACK USAGE:
+     * - Push: [previous_result, sign_before_parentheses]
+     * - Pop: Apply sign to sub-expression result, add to previous result
+     * 
+     * Example: "1-(2+3)" → 1 - 5 = -4
+     * 
+     * Time: O(n), Space: O(n) for stack in worst case (nested parentheses)
+     */
     public static int calculate(String s) {
         Stack<Integer> stack = new Stack<>();
 

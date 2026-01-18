@@ -1,5 +1,25 @@
 package BinarySearch;
 
+/**
+ * Find Smallest Divisor Given Threshold Algorithm:
+ * Find the smallest divisor such that sum of ceil(nums[i]/divisor) <= threshold
+ * 
+ * BINARY SEARCH APPROACH:
+ * 1. Search space: [1, max(nums)] - divisor must be at least 1
+ * 2. For each divisor, calculate sum of ceil(nums[i]/divisor)
+ * 3. If sum <= threshold: try smaller divisor (search left half)
+ * 4. If sum > threshold: need larger divisor (search right half)
+ * 
+ * KEY INSIGHT: As divisor increases, sum decreases (monotonic property)
+ * This allows binary search to find the boundary efficiently.
+ * 
+ * Example: nums=[1,2,5,9], threshold=6
+ * divisor=5: ceil(1/5)+ceil(2/5)+ceil(5/5)+ceil(9/5) = 1+1+1+2 = 5 <= 6 ✓
+ * divisor=4: ceil(1/4)+ceil(2/4)+ceil(5/4)+ceil(9/4) = 1+1+2+3 = 7 > 6 ✗
+ * Answer: 5
+ * 
+ * Time: O(n * log(max)), Space: O(1)
+ */
 public class FindTheSmallestDivisorGivenThreshold {
     private int findMax(int[] nums) {
         int max = Integer.MIN_VALUE;

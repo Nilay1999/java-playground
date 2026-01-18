@@ -1,6 +1,23 @@
 package Array;
 
 public class DecodeTheSlantedCiphertext {
+    /**
+     * Slanted Cipher Decoding Algorithm:
+     * 1. Reconstruct 2D matrix from encoded string (row by row)
+     * 2. Read diagonally from top-left to bottom-right for each column start
+     * 3. Remove trailing spaces from decoded message
+     * 
+     * Visual Example (rows=4):
+     * "iveo    eed   l te   olc" → Matrix:
+     * i v e o     
+     *   e e d    
+     *     l   t e
+     *       o l c
+     * 
+     * Read diagonals: i→ →e→l→o, v→e→ →l, e→e→t→c, o→d→e, etc.
+     * 
+     * Time: O(rows * cols), Space: O(rows * cols)
+     */
     public String decodeCiphertext(String encodedText, int rows) {
         int cols = encodedText.length() / rows;
         if (encodedText.isEmpty()) {

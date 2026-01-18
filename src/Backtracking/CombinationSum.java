@@ -4,6 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CombinationSum {
+    /**
+     * Combination Sum Algorithm (Backtracking with Repetition):
+     * Find all unique combinations where candidates sum to target.
+     * Each number can be used multiple times.
+     * 
+     * Backtracking Strategy:
+     * 1. For each candidate, decide to include it or not
+     * 2. If included, can reuse same candidate (pass same index)
+     * 3. Prune: stop if sum exceeds target
+     * 4. Base case: sum equals target → add to result
+     * 
+     * Key insight: Start from current index to avoid duplicates
+     * Example: [2,3,6,7], target=7 → [[2,2,3], [7]]
+     * 
+     * Time: O(N^(T/M)) where N=candidates, T=target, M=minimal candidate
+     * Space: O(T/M) for recursion depth
+     */
     private static List<List<Integer>> answer;
 
     public static void backtracking(int[] candidates, List<Integer> temp, int sum, int target, int idx) {
