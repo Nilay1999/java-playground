@@ -25,28 +25,39 @@ public class DiagonalTraverse {
      * Time: O(m*n), Space: O(1) excluding output
      */
     public int[] findDiagonalOrder(int[][] mat) {
-        int n = mat.length;
-        int m = mat[0].length;
+        int n = mat.length;    // number of rows
+        int m = mat[0].length; // number of columns
 
         int[] ans = new int[m * n];
-        int i = 0, j = 0;
+        int i = 0, j = 0; // current position in matrix
+        
         for (int k = 0; k < ans.length; k++) {
+            // Add current element to result
             ans[k] = mat[i][j];
 
+            // Even diagonal (i+j is even): move up-right ↗
             if ((i + j) % 2 == 0) {
+                // Hit right edge: move down
                 if (j == m - 1)
                     i++;
+                // Hit top edge: move right
                 else if (i == 0)
                     j++;
+                // Normal case: move up-right
                 else {
                     i--;
                     j++;
                 }
-            } else {
+            } 
+            // Odd diagonal (i+j is odd): move down-left ↙
+            else {
+                // Hit bottom edge: move right
                 if (i == n - 1)
                     j++;
+                // Hit left edge: move down
                 else if (j == 0)
                     i++;
+                // Normal case: move down-left
                 else {
                     i++;
                     j--;

@@ -52,15 +52,23 @@ public class LetterCombinationOfPhoneNumber {
     }
 
     private static void backtrack(List<String> res, String digits, int idx, StringBuilder str) {
+        // Base case: processed all digits
         if (idx == digits.length()) {
-            res.add(str.toString());
+            res.add(str.toString()); // add complete combination
             return;
         }
+        
+        // Get current digit and its corresponding letters
         int key = Character.getNumericValue(digits.charAt(idx));
         String letters = MAP.getOrDefault(key, "");
+        
+        // Try each letter for current digit
         for (char s : letters.toCharArray()) {
+            // Include current letter
             str.append(s);
+            // Recurse for next digit
             backtrack(res, digits, idx + 1, str);
+            // Backtrack: remove last letter to try next option
             str.deleteCharAt(str.length() - 1);
         }
     }

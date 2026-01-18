@@ -42,19 +42,29 @@ import java.util.Map;
 public class ContiguousArray {
     public int findMaxLength(int[] nums) {
         int max = 0;
-        int sum = 0;
+        int sum = 0; // running prefix sum (treat 0 as -1, 1 as +1)
         Map<Integer, Integer> map = new HashMap<>();
+        // Initialize: prefix sum 0 at index -1 (before array starts)
         map.put(0, -1);
+        
         for (int i = 0; i < nums.length; i++) {
+            // Convert 0 to -1, keep 1 as +1
             if (nums[i] == 0) {
                 sum += -1;
             } else {
                 sum += 1;
             }
+            
+            // If this prefix sum seen before, we found a subarray with equal 0s and 1s
             if (map.get(sum) != null) {
+                // Calculate length from first occurrence to current index
                 max = Math.max(max, i - map.get(sum));
             }
-            map.put(sum, i);
+            
+            // Store first occurrence of this prefix sum (don't overwrite)
+            if (!map.containsKey(sum)) {
+                map.put(sum, i);
+            }
         }
 
         return max;

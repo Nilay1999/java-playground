@@ -48,19 +48,29 @@ public class NumMatrix {
         int row = matrix.length;
         int col = matrix[0].length;
 
+        // Create 1-indexed prefix array (extra row and column for easier calculation)
         this.prefix = new int[row + 1][col + 1];
 
+        // Build 2D prefix sum array
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= col; j++) {
-                this.prefix[i][j] = matrix[i - 1][j - 1] + this.prefix[i][j - 1] + this.prefix[i - 1][j]
-                        - this.prefix[i - 1][j - 1];
+                // Inclusion-exclusion principle:
+                // Current cell = matrix value + left prefix + top prefix - diagonal overlap
+                this.prefix[i][j] = matrix[i - 1][j - 1]      // current cell value
+                                  + this.prefix[i][j - 1]     // sum from left
+                                  + this.prefix[i - 1][j]     // sum from top
+                                  - this.prefix[i - 1][j - 1]; // subtract overlap (counted twice)
             }
         }
     }
 
     public int sumRegion(int row1, int col1, int row2, int col2) {
-        return prefix[row2 + 1][col2 + 1] - prefix[row2 + 1][col1]
-                - prefix[row1][col2 + 1] + prefix[row1][col1];
+        // Calculate rectangle sum using inclusion-exclusion
+        // Total area - left strip - top strip + top-left corner (added back)
+        return prefix[row2 + 1][col2 + 1]    // total sum up to bottom-right
+             - prefix[row2 + 1][col1]        // subtract left strip
+             - prefix[row1][col2 + 1]        // subtract top strip
+             + prefix[row1][col1];           // add back top-left corner (subtracted twice)
     }
 
     public static void main(String[] args) {

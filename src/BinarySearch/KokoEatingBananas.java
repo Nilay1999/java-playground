@@ -24,21 +24,27 @@ import java.util.Arrays;
  */
 public class KokoEatingBananas {
     public int minEatingSpeed(int[] piles, int h) {
-        int left = 1;
-        int right = Arrays.stream(piles).max().getAsInt();
+        // Binary search on eating speed
+        int left = 1; // minimum possible speed
+        int right = Arrays.stream(piles).max().getAsInt(); // maximum needed speed
         int ans = right;
+        
         while (left <= right) {
             double hours = 0;
-            int mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2; // current speed to test
 
+            // Calculate total hours needed at speed mid
             for (int pile : piles) {
+                // Each pile takes ceil(pile/speed) hours
                 hours += Math.ceil((double)pile / mid);
             }
 
+            // If we can finish in time, try slower speed
             if (hours <= h) {
-                ans = mid;
-                right = mid - 1;
+                ans = mid; // update answer
+                right = mid - 1; // search for slower speed
             } else {
+                // Too slow, need faster speed
                 left = mid + 1;
             }
         }

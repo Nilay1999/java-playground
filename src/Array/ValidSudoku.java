@@ -18,18 +18,26 @@ public class ValidSudoku {
      */
 
     public boolean isValidSudoku(char[][] board) {
+        // Use set to track seen numbers with unique identifiers
         Set<String> set = new HashSet<>();
         int row = board.length;
         int col = board[0].length;
+        
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
+                // Create unique identifiers for each constraint
                 String rowCheck = board[i][j] + "in row:" + i;
                 String colCheck = board[i][j] + "in col:" + j;
+                // Box index: (i/3, j/3) identifies which 3x3 box
                 String sqCheck = board[i][j] + "in sq:" + (i / 3) + ":" + (j / 3);
+                
+                // Skip empty cells
                 if (board[i][j] != '.') {
+                    // Check if number violates any constraint
                     if (set.contains(rowCheck) || set.contains(colCheck) || set.contains(sqCheck)) {
-                        return false;
+                        return false; // Duplicate found
                     } else {
+                        // Add all three constraints to set
                         set.add(rowCheck);
                         set.add(colCheck);
                         set.add(sqCheck);
@@ -38,7 +46,7 @@ public class ValidSudoku {
             }
         }
 
-        return true;
+        return true; // No violations found
     }
 
     public static void main(String[] args) {

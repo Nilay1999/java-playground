@@ -18,18 +18,22 @@ public class DFSInGraph {
      * Time: O(V + E), Space: O(V) for recursion stack and visited array
      */
 
+    // Helper: Add undirected edge between source and destination
     public void addEdge(List<List<Integer>> adj, int source, int dest) {
-        adj.get(source).add(dest);
-        adj.get(dest).add(source);
+        adj.get(source).add(dest); // add edge source → dest
+        adj.get(dest).add(source); // add edge dest → source (undirected)
     }
 
+    // DFS traversal starting from node v
     public void dfs(List<Integer> result, List<List<Integer>> adj, boolean[] visited, int v) {
+        // Mark current node as visited
         visited[v] = true;
-        result.add(v);
+        result.add(v); // add to result
 
-        for (int i : adj.get(v)) {
-            if (!visited[i]) {
-                dfs(result, adj, visited, i);
+        // Recursively visit all unvisited neighbors
+        for (int neighbor : adj.get(v)) {
+            if (!visited[neighbor]) {
+                dfs(result, adj, visited, neighbor);
             }
         }
     }

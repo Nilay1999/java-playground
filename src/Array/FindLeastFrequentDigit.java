@@ -16,19 +16,24 @@ public class FindLeastFrequentDigit {
      * Time: O(log n) - number of digits, Space: O(1) - at most 10 digits
      */
     public int getLeastFrequentDigit(int n) {
+        // Step 1: Count frequency of each digit
         Map<Integer, Integer> frq = new HashMap<>();
         while (n != 0) {
+            // Extract rightmost digit
             int digit = n % 10;
+            // Increment frequency count
             frq.put(digit, frq.getOrDefault(digit, 0) + 1);
+            // Remove rightmost digit
             n = n / 10;
         }
 
+        // Step 2: Find digit with minimum frequency
         int min = Integer.MAX_VALUE;
         int ans = 0;
         for (Map.Entry<Integer, Integer> entry : frq.entrySet()) {
             if (entry.getValue() < min) {
-                ans = entry.getKey();
-                min = entry.getValue();
+                ans = entry.getKey();    // store the digit
+                min = entry.getValue();  // update minimum frequency
             }
         }
         return ans;

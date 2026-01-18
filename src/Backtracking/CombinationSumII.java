@@ -24,20 +24,30 @@ public class CombinationSumII {
     private static List<List<Integer>> answer;
 
     public static void backtracking(int[] candidates, List<Integer> temp, int sum, int target, int idx) {
+        // Base case: if sum reaches or exceeds target
         if (sum >= target) {
+            // If exact match, add current combination to answer
             if (sum == target) {
                 answer.add(new ArrayList<>(temp));
             }
-            return;
+            return; // Prune: stop exploring this branch
         }
 
+        // Try each candidate starting from idx
         for (int i = idx; i < candidates.length; i++) {
+            // Skip duplicates at same recursion level to avoid duplicate combinations
+            // Example: [1,1,2] - at level 0, use first 1, skip second 1
             if (i > idx && candidates[i] == candidates[i - 1]) {
                 continue;
             }
+            
+            // Only proceed if candidate doesn't exceed remaining target
             if (candidates[i] <= target) {
+                // Include current candidate
                 temp.add(candidates[i]);
+                // Recurse with i+1 (each number used only once)
                 backtracking(candidates, temp, sum + candidates[i], target, i + 1);
+                // Backtrack: remove last added candidate
                 temp.remove(temp.size() - 1);
             }
         }
@@ -45,6 +55,7 @@ public class CombinationSumII {
 
     public static List<List<Integer>> combinationSumII(int[] candidates, int target) {
         answer = new ArrayList<List<Integer>>();
+        // Sort to group duplicates together for easier skipping
         Arrays.sort(candidates);
         List<Integer> temp = new ArrayList<>();
         backtracking(candidates, temp, 0, target, 0);

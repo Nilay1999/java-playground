@@ -15,15 +15,20 @@ public class KthFactorOfN {
      * Time: O(n), Space: O(1)
      */
     public int kthFactor(int n, int k) {
-        int counter = 0;
+        int counter = 0; // count of factors found so far
+        
+        // Check each number from 1 to n
         for (int i = 1; i <= n; i++) {
+            // If i divides n evenly, it's a factor
             if (n % i == 0) {
                 counter++;
+                // If this is the kth factor, return it
                 if (counter == k) {
                     return i;
                 }
             }
         }
+        // If we don't have k factors, return -1
         return -1;
     }
 

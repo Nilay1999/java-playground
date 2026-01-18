@@ -30,15 +30,20 @@ public class MinStack {
     }
 
     public void push(int val) {
+        // Always push to main stack
         stack.push(val);
-        if (!monotonicStack.isEmpty() && val <= monotonicStack.peek()) {
+        
+        // Push to min stack if it's empty or val is new minimum
+        if (monotonicStack.isEmpty() || val <= monotonicStack.peek()) {
             monotonicStack.push(val);
         }
     }
 
     public void pop() {
         if (!stack.isEmpty()) {
-            int val = stack.pop();
+            int val = stack.pop(); // pop from main stack
+            
+            // If popped value is current minimum, pop from min stack too
             if (!monotonicStack.isEmpty() && monotonicStack.peek() == val) {
                 monotonicStack.pop();
             }
@@ -46,10 +51,12 @@ public class MinStack {
     }
 
     public int top() {
+        // Return top of main stack
         return !stack.isEmpty() ? stack.peek() : -1;
     }
 
     public int getMin() {
+        // Return top of min stack (current minimum)
         return !monotonicStack.isEmpty() ? monotonicStack.peek() : -1;
     }
 

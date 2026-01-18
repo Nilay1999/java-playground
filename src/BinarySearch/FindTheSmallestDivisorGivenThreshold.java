@@ -21,6 +21,7 @@ package BinarySearch;
  * Time: O(n * log(max)), Space: O(1)
  */
 public class FindTheSmallestDivisorGivenThreshold {
+    // Helper: Find maximum element in array
     private int findMax(int[] nums) {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < nums.length; i++) {
@@ -31,28 +32,35 @@ public class FindTheSmallestDivisorGivenThreshold {
         return max;
     }
 
+    // Helper: Calculate sum of ceil(nums[i]/divisor) for all elements
     private int getSum(int[] nums, int divisor) {
         int sum = 0;
         for (int num : nums) {
+            // Add ceiling of division
             sum += (int) Math.ceil(((double) num / (double) divisor));
         }
         return sum;
     }
 
     public int smallestDivisor(int[] nums, int threshold) {
-        int left = 1;
-        int right = findMax(nums);
+        // Binary search on divisor value
+        int left = 1;              // minimum possible divisor
+        int right = findMax(nums); // maximum needed divisor
 
         while (left <= right) {
-            int mid = left + (right - left) / 2;
-            int sum = getSum(nums, mid);
+            int mid = left + (right - left) / 2; // current divisor to test
+            int sum = getSum(nums, mid);         // calculate result sum
+
+            // If sum is within threshold, try smaller divisor
             if (sum <= threshold) {
-                right = mid - 1;
+                right = mid - 1; // search left for smaller divisor
             } else {
+                // Sum too large, need larger divisor
                 left = mid + 1;
             }
         }
 
+        // left is the smallest divisor that satisfies the constraint
         return left;
     }
 

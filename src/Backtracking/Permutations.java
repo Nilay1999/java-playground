@@ -24,15 +24,22 @@ public class Permutations {
     private static List<List<Integer>> answer;
 
     public static void backtracking(int[] candidates, List<Integer> temp) {
+        // Base case: permutation is complete
         if (temp.size() == candidates.length) {
-            answer.add(new ArrayList<>(temp));
+            answer.add(new ArrayList<>(temp)); // create copy
             return;
         }
 
+        // Try each candidate number
         for (int candidate : candidates) {
+            // Skip if already used in current permutation
             if (temp.contains(candidate)) continue;
+            
+            // Include candidate in current permutation
             temp.add(candidate);
+            // Recurse to fill next position
             backtracking(candidates, temp);
+            // Backtrack: remove candidate to try other options
             temp.remove(temp.size() - 1);
         }
         return;

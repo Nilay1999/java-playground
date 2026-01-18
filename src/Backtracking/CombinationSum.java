@@ -24,17 +24,24 @@ public class CombinationSum {
     private static List<List<Integer>> answer;
 
     public static void backtracking(int[] candidates, List<Integer> temp, int sum, int target, int idx) {
+        // Base case: if sum reaches or exceeds target
         if (sum >= target) {
+            // If exact match, add current combination to answer
             if (sum == target) {
                 answer.add(new ArrayList<>(temp));
             }
-            return;
+            return; // Prune: stop exploring this branch
         }
 
+        // Try each candidate starting from idx (avoid duplicates by not going backwards)
         for (int i = idx; i < candidates.length; i++) {
+            // Only proceed if candidate doesn't exceed remaining target
             if (candidates[i] <= target) {
+                // Include current candidate
                 temp.add(candidates[i]);
+                // Recurse with same index i (allow reusing same number)
                 backtracking(candidates, temp, sum + candidates[i], target, i);
+                // Backtrack: remove last added candidate
                 temp.remove(temp.size() - 1);
             }
         }

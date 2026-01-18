@@ -20,41 +20,55 @@ public class CourseSchedule {
      * Time: O(V + E), Space: O(V) for recursion and arrays
      */
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // Build adjacency list for directed graph
         List<List<Integer>> adjList = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
             adjList.add(new ArrayList<>());
         }
 
+        // Add edges: prerequisite → course
         for (int[] prerequisite : prerequisites) {
             int course = prerequisite[0];
             int pre = prerequisite[1];
-            adjList.get(pre).add(course);
+            adjList.get(pre).add(course); // pre must be taken before course
         }
 
+        // Track visited nodes and nodes in current recursion path
         boolean[] visited = new boolean[numCourses];
         boolean[] inRecursion = new boolean[numCourses];
+        
+        // Check each course for cycles
         for (int i = 0; i < numCourses; i++) {
             if (!visited[i] && hasCycle(adjList, visited, inRecursion, i)) {
-                return false;
+                return false; // cycle found, can't finish all courses
             }
         }
 
-        return true;
+        return true; // no cycles, can finish all courses
     }
 
+    // DFS to detect cycle in directed graph
     private boolean hasCycle(List<List<Integer>> adjList, boolean[] visited, boolean[] inRecursion, int node) {
+        // If node is in current recursion path, cycle detected
         if (inRecursion[node]) return true;
+        
+        // If node already processed, no cycle from this node
         if (visited[node]) return false;
 
+        // Mark node as visited and add to recursion path
         visited[node] = true;
-        inRecursion[node] = true; // mark as visiting
+        inRecursion[node] = true; // GRAY state (visiting)
+        
+        // Check all neighbors for cycles
         for (int neighbor : adjList.get(node)) {
             if (hasCycle(adjList, visited, inRecursion, neighbor)) {
-                return true;
+                return true; // cycle found in neighbor's path
             }
         }
-        inRecursion[node] = false; // mark as visited
-        return false;
+        
+        // Remove from recursion path (backtrack)
+        inRecursion[node] = false; // BLACK state (visited)
+        return false; // no cycle found
     }
 
     public static void main(String[] args) {

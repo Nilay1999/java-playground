@@ -18,20 +18,27 @@ public class NumberOfLaserBeamsInBank {
      * Time: O(m*n) where m=rows, n=cols, Space: O(m) for storing device counts
      */
     public int numberOfBeams(String[] bank) {
+        // Step 1: Count devices in each row, store only non-empty rows
         List<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < bank.length; i++) {
             char[] line = bank[i].toCharArray();
-            int laser = 0;
+            int laser = 0; // count of devices ('1') in current row
+            
+            // Count security devices in this row
             for (char c : line) {
                 if (c == '1')
                     laser++;
             }
+            // Only store rows that have at least one device
             if (laser > 0)
                 list.add(laser);
         }
+        
+        // Step 2: Calculate total beams between consecutive rows with devices
         int total = 0;
         for (int i = 0; i < list.size() - 1; i++) {
+            // Beams = devices_in_row_i × devices_in_row_(i+1)
             if (i + 1 < list.size())
                 total += list.get(i) * list.get(i + 1);
         }

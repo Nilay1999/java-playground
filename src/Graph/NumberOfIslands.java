@@ -51,27 +51,37 @@ public class NumberOfIslands {
         int m = grid[0].length;
 
         boolean[][] visited = new boolean[n][m];
-        int island = 0;
+        int island = 0; // count of islands
 
+        // Iterate through each cell in grid
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
+                // If cell is land ('1') and not visited, found new island
                 if (!visited[i][j] && grid[i][j] == '1') {
-                    dfs(grid, visited, i, j);
-                    island++;
+                    dfs(grid, visited, i, j); // mark all connected land
+                    island++; // increment island count
                 }
             }
         }
         return island;
     }
 
+    // DFS to mark all connected land cells as visited
     private void dfs(char[][] grid, boolean[][] visited, int i, int j) {
+        // 4 directions: down, up, right, left
         int[][] direction = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        
+        // Mark current cell as visited
         visited[i][j] = true;
+        
+        // Explore all 4 neighbors
         for (int[] dir : direction) {
             int row = i + dir[0];
             int col = j + dir[1];
-            if (row < grid.length && row >= 0 && col >= 0
-                    && col < grid[0].length) {
+            
+            // Check if neighbor is within bounds
+            if (row < grid.length && row >= 0 && col >= 0 && col < grid[0].length) {
+                // If neighbor is land and not visited, recurse
                 if (!visited[row][col] && grid[row][col] == '1') {
                     dfs(grid, visited, row, col);
                 }
@@ -80,25 +90,28 @@ public class NumberOfIslands {
         return;
     }
 
+    // BFS alternative approach
     private void bfs(char[][] grid, boolean[][] visited, int row, int col, int[][] directions) {
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[] { row, col });
-        visited[row][col] = true;
+        visited[row][col] = true; // mark starting cell as visited
 
         while (!queue.isEmpty()) {
-            int[] point = queue.poll();
+            int[] point = queue.poll(); // dequeue current cell
 
+            // Explore all 4 neighbors
             for (int[] dir : directions) {
                 int newX = point[0] + dir[0];
                 int newY = point[1] + dir[1];
 
+                // Check bounds, visited status, and if it's land
                 if (newX >= 0 && newX < grid.length &&
                         newY >= 0 && newY < grid[0].length &&
                         !visited[newX][newY] &&
                         grid[newX][newY] == '1') {
 
-                    visited[newX][newY] = true;
-                    queue.offer(new int[] { newX, newY });
+                    visited[newX][newY] = true; // mark as visited
+                    queue.offer(new int[] { newX, newY }); // enqueue neighbor
                 }
             }
         }

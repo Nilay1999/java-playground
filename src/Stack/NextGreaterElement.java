@@ -25,18 +25,24 @@ public class NextGreaterElement {
      * Time: O(n), Space: O(n)
      */
 
+    // Next Greater Element I: Find next greater for subset in main array
     public static int[] nextGreaterElementI(int[] subarr, int[] arr) {
         Stack<Integer> stack = new Stack<>();
-        int[] nextGreater = new int[10001];
+        int[] nextGreater = new int[10001]; // mapping: value → next greater
 
+        // Build next greater mapping for main array (right to left)
         for (int i = arr.length - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && arr[i] < stack.peek()) {
+            // Pop smaller or equal elements
+            while (!stack.isEmpty() && arr[i] >= stack.peek()) {
                 stack.pop();
             }
+            // Top of stack is next greater, or -1 if stack empty
             nextGreater[arr[i]] = stack.isEmpty() ? -1 : stack.peek();
+            // Push current element
             stack.push(arr[i]);
         }
 
+        // Use mapping to answer queries for subset
         for (int i = 0; i < subarr.length; i++) {
             subarr[i] = nextGreater[subarr[i]];
         }
@@ -44,17 +50,23 @@ public class NextGreaterElement {
         return subarr;
     }
 
+    // Next Greater Element II: Circular array with wraparound
     public static int[] nextGreaterElementII(int[] arr) {
         Stack<Integer> stack = new Stack<>();
         int n = arr.length;
         int[] answer = new int[n];
+        
+        // Process array twice (2n iterations) to simulate circular behavior
         for (int i = 2 * n - 1; i >= 0; i--) {
+            // Pop smaller or equal elements
             while (!stack.isEmpty() && arr[i % n] >= stack.peek()) {
                 stack.pop();
             }
+            // Only store results for first n iterations
             if (i < n) {
                 answer[i] = stack.isEmpty() ? -1 : stack.peek();
             }
+            // Push current element (use modulo for circular access)
             stack.push(arr[i % n]);
         }
         return answer;

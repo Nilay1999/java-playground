@@ -47,15 +47,24 @@ import java.util.Map;
 public class SubarraySumEqualsK {
     public int subarraySum(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
-        int subarray = 0;
-        int sum = 0;
+        int subarray = 0; // count of subarrays with sum k
+        int sum = 0;      // running prefix sum
+        
+        // Initialize: prefix sum 0 occurs once (empty subarray)
         map.put(0, 1);
+        
         for (int i = 0; i < nums.length; i++) {
+            // Update running sum
             sum += nums[i];
+            
+            // Check if (sum - k) exists in map
+            // If yes, there are subarrays ending at i with sum k
             Integer current = map.get(sum - k);
             if (current != null) {
-                subarray += current;
+                subarray += current; // add count of all such subarrays
             }
+            
+            // Store/update frequency of current prefix sum
             map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
         return subarray;

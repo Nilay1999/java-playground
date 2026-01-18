@@ -28,13 +28,19 @@ public class GenerateParentheses {
     }
 
     private static void backtrack(int left, int right, String str, int n, List<String> res) {
+        // Base case: generated complete valid parentheses string
         if (str.length() == n * 2) {
             res.add(str);
             return;
         }
+        
+        // Add opening bracket '(' if we haven't used all n
         if (right < n) {
             backtrack(left, right + 1, str + "(", n, res);
         }
+        
+        // Add closing bracket ')' only if it keeps string valid
+        // Valid means: number of ')' < number of '(' so far
         if (left < right) {
             backtrack(left + 1, right, str + ")", n, res);
         }

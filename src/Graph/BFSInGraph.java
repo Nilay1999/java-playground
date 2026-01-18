@@ -27,16 +27,21 @@ class BFSInGraph {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[vertices];
 
+        // Start BFS from node 0
         queue.offer(0);
+        visited[0] = true; // mark starting node as visited
 
         while (!queue.isEmpty()) {
+            // Dequeue front node
             Integer node = queue.poll();
-            result.add(node);
+            result.add(node); // add to result
 
-            for (Integer level : adList.get(node)) {
-                if (!visited[level]) {
-                    visited[level] = true;
-                    queue.add(level);
+            // Explore all neighbors of current node
+            for (Integer neighbor : adList.get(node)) {
+                // If neighbor not visited, mark and enqueue
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.add(neighbor);
                 }
             }
         }

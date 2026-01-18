@@ -37,19 +37,24 @@ import java.util.Set;
 public class SetMismatch {
     public int[] findErrorNums(int[] nums) {
         int n = nums.length;
+        // Calculate expected sum of numbers 1 to n
         int expectedTotal = n * (n + 1) / 2;
 
         int currentTotal = 0;
         int duplicate = -1;
         Set<Integer> set = new HashSet<>();
 
+        // Traverse array to find duplicate and calculate current sum
         for (int num : nums) {
             currentTotal += num;
+            // If add() returns false, number already exists (duplicate)
             if (!set.add(num)) {
                 duplicate = num;
             }
         }
 
+        // Calculate missing number: expected - (current - duplicate)
+        // This works because: current = expected - missing + duplicate
         int missing = expectedTotal - (currentTotal - duplicate);
         return new int[] { duplicate, missing };
     }

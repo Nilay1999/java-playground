@@ -22,20 +22,25 @@ public class ThemeParkRides {
 
         int minFinishTime = Integer.MAX_VALUE;
 
-        // Iterate over all land rides
+        // Try all combinations of land and water rides
         for (int i = 0; i < n; i++) {
-            // Iterate over all water rides
             for (int j = 0; j < m; j++) {
 
-                // Plan 1: Land ride first, then water ride
+                // Strategy 1: Do land ride first, then water ride
+                // Calculate when land ride finishes
                 int landFinish = landStartTime[i] + landDuration[i];
+                // Water ride starts at its scheduled time or after land finishes (whichever is later)
                 int waterStart = Math.max(waterStartTime[j], landFinish);
+                // Calculate total finish time
                 int waterFinish = waterStart + waterDuration[j];
                 minFinishTime = Math.min(minFinishTime, waterFinish);
 
-                // Plan 2: Water ride first, then land ride
+                // Strategy 2: Do water ride first, then land ride
+                // Calculate when water ride finishes
                 int waterFinishFirst = waterStartTime[j] + waterDuration[j];
+                // Land ride starts at its scheduled time or after water finishes (whichever is later)
                 int landStartSecond = Math.max(landStartTime[i], waterFinishFirst);
+                // Calculate total finish time
                 int landFinishSecond = landStartSecond + landDuration[i];
                 minFinishTime = Math.min(minFinishTime, landFinishSecond);
             }

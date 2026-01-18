@@ -48,20 +48,57 @@ package DynamicProgramming;
  * Time: O(n²) with memoization, Space: O(n)
  */
 public class UniqueBinarySearchTrees {
+    /**
+     * Naive recursive approach - recalculates same subproblems multiple times
+     * Time: O(4^n / n^1.5) - exponential, Space: O(n) recursion stack
+     */
     public int numTrees(int n) {
+        // Base cases: 0 or 1 nodes → exactly 1 tree (empty or single node)
         if (n == 0 || n == 1) {
             return 1;
         }
+        // Base case: 2 nodes → 2 unique BSTs
         if (n == 2) {
             return 2;
         }
+        // Base case: 3 nodes → 5 unique BSTs (Catalan number C(3))
         if (n == 3) {
             return 5;
         }
+        
+        // For n nodes, try each node i as root
         int total = 0;
         for (int i = 1; i <= n; i++) {
+            // Left subtree has (i-1) nodes, right subtree has (n-i) nodes
+            // Multiply number of left trees by number of right trees
+            // This gives all combinations with node i as root
             total += numTrees(i - 1) * numTrees(n - i);
         }
+        return total;
+    }
+
+    /**
+     * Optimized approach with memoization - stores computed results
+     * Time: O(n²), Space: O(n)
+     */
+    public int memoization(Integer[] memo, int n) {
+        // Base case: 0 or 1 nodes → 1 tree
+        if (n <= 1) return 1;
+        
+        // Return cached result if already computed
+        if (memo[n] != null) return memo[n];
+        
+        // Try each node i (1 to n) as root
+        int total = 0;
+        for(int i = 1; i <= n; i++) {
+            // Left subtree: nodes 1 to (i-1) → count = memoization(memo, i-1)
+            // Right subtree: nodes (i+1) to n → count = memoization(memo, n-i)
+            // Multiply to get all valid BST combinations with i as root
+            total += memoization(memo, i - 1) * memoization(memo, n - i);
+        }
+        
+        // Store result in memo array before returning
+        memo[n] = total;
         return total;
     }
 

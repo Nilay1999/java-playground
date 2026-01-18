@@ -51,18 +51,21 @@ import java.util.*;
  */
 public class SlidingWindowMaximum {
 
+    // Approach 1: Brute Force - O(n*k)
     public static int[] maxSlidingWindowBruteForce(int[] nums, int k) {
         int n = nums.length;
         if (n == 0 || k == 0) {
             return new int[0];
         }
 
-        int numOfWindow = n - k + 1;
+        int numOfWindow = n - k + 1; // number of windows
         int[] result = new int[numOfWindow];
 
+        // For each window, find maximum by scanning all k elements
         for (int start = 0; start < numOfWindow; ++start) {
             int end = start + k - 1;
             int maxVal = nums[start];
+            // Find max in current window
             for (int i = start + 1; i <= end; ++i) {
                 if (nums[i] > maxVal) {
                     maxVal = nums[i];
@@ -74,6 +77,7 @@ public class SlidingWindowMaximum {
         return result;
     }
 
+    // Approach 2: Max Heap - O(n log n)
     public static int[] usingHeap(int[] nums, int k) {
         if (nums.length == 0 || k == 0) {
             return new int[0];
@@ -81,14 +85,18 @@ public class SlidingWindowMaximum {
         int n = nums.length;
         List<Integer> res = new ArrayList<>();
 
+        // Max heap to track maximum in window
         PriorityQueue<Integer> maxPQ = new PriorityQueue<>(Comparator.reverseOrder());
 
         for (int i = 0; i < n; ++i) {
             int start = i - k;
+            // Remove element outside window
             if (start >= 0) {
                 maxPQ.remove(nums[start]);
             }
+            // Add current element
             maxPQ.offer(nums[i]);
+            // If window complete, add maximum to result
             if (maxPQ.size() == k) {
                 res.add(maxPQ.peek());
             }
@@ -96,20 +104,28 @@ public class SlidingWindowMaximum {
         return res.stream().mapToInt(Integer::intValue).toArray();
     }
 
+    // Approach 3: Monotonic Deque - O(n) OPTIMAL
     public static int[] maxSlidingWindow(int[] nums, int k) {
-        Deque<Integer> win = new ArrayDeque<>();
+        Deque<Integer> win = new ArrayDeque<>(); // stores indices
         int n = nums.length;
         List<Integer> result = new ArrayList<>();
+        
         for (int i = 0; i < n; i++) {
+            // Remove indices outside current window from front
             while (!win.isEmpty() && win.peekFirst() <= i - k) {
                 win.pollFirst();
             }
 
+            // Remove indices with smaller values from back
+            // Maintains decreasing order of values
             while (!win.isEmpty() && nums[win.peekLast()] < nums[i]) {
                 win.pollLast();
             }
 
+            // Add current index to back
             win.offerLast(i);
+            
+            // If window complete, add maximum (front of deque) to result
             if (i >= k - 1 && win.peekFirst() != null) {
                 result.add(nums[win.peekFirst()]);
             }
