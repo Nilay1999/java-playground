@@ -17,12 +17,13 @@ public class CoinChange {
      * 
      * Time: O(amount × coins), Space: O(amount)
      */
+    static int INF = (int) 1e9;
 
     // Bottom-Up Tabulation: Build solution from smallest subproblems
     public static int coinChange(int[] coins, int amount) {
         // dp[i] = minimum coins needed to make amount i
         int[] dp = new int[amount + 1];
-        Arrays.fill(dp, Integer.MAX_VALUE); // initialize with "impossible"
+        Arrays.fill(dp, INF); // initialize with "impossible"
         dp[0] = 0; // base case: 0 coins needed for amount 0
 
         // For each coin denomination
@@ -30,7 +31,7 @@ public class CoinChange {
             // Update all amounts that can be formed using this coin
             for (int i = coin; i <= amount; i++) {
                 // If amount (i-coin) is achievable, we can make amount i
-                if (dp[i - coin] != Integer.MAX_VALUE) {
+                if (dp[i - coin] != INF) {
                     // Take minimum: current way vs using this coin
                     dp[i] = Math.min(dp[i], dp[i - coin] + 1);
                 }
@@ -38,7 +39,7 @@ public class CoinChange {
         }
 
         // Return result: -1 if impossible, else minimum coins
-        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+        return dp[amount] == INF ? -1 : dp[amount];
     }
 
     // Top-Down Memoization: Solve recursively with caching
@@ -49,22 +50,25 @@ public class CoinChange {
 
         int res = recursion(coins, 0, amount, memo);
 
-        return res == Integer.MAX_VALUE ? -1 : res;
+        return res == INF ? -1 : res;
     }
 
     private static int recursion(int[] coins, int idx, int value, Integer[][] memo) {
         int n = coins.length;
         // Base case: exact amount reached
-        if (value == 0) return 0;
+        if (value == 0)
+            return 0;
         // Base case: out of coins or negative amount
-        if (idx >= n || value < 0) return Integer.MAX_VALUE;
+        if (idx >= n || value < 0)
+            return INF;
 
         // Return cached result if available
-        if (memo[value][idx] != null) return memo[value][idx];
+        if (memo[value][idx] != null)
+            return memo[value][idx];
 
         // Option 1: Take current coin (can reuse same coin)
         int takeIt = recursion(coins, idx, value - coins[idx], memo);
-        if (takeIt != Integer.MAX_VALUE) {
+        if (takeIt != INF) {
             takeIt += 1; // add 1 coin to count
         }
 
@@ -77,11 +81,10 @@ public class CoinChange {
     }
 
     public static void main(String[] args) {
-        int[] coins = {1, 2, 5};
+        int[] coins = { 1, 2, 5 };
         int amount = 11;
 
-        System.out.println("Tabulation: " + coinChange(coins, amount));         // Output: 3
+        System.out.println("Tabulation: " + coinChange(coins, amount)); // Output: 3
         System.out.println("Memoization: " + coinChangeMemoization(coins, amount)); // Output: 3
     }
 }
-
