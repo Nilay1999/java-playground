@@ -42,15 +42,15 @@ import java.util.Set;
  * 
  * Traversal:
  * i=0: not visited, start DFS
- *   - Visit 0, explore neighbors: 1
- *   - Visit 1, explore neighbors: 0 (visited)
- *   - Province 1 complete, count = 1
+ * - Visit 0, explore neighbors: 1
+ * - Visit 1, explore neighbors: 0 (visited)
+ * - Province 1 complete, count = 1
  * 
  * i=1: visited, skip
  * 
  * i=2: not visited, start DFS
- *   - Visit 2, explore neighbors: none
- *   - Province 2 complete, count = 2
+ * - Visit 2, explore neighbors: none
+ * - Province 2 complete, count = 2
  * 
  * Result: 2 provinces
  * 
@@ -146,10 +146,10 @@ public class NumberOfProvinces {
     }
 
     private void dfs(int[][] isConnected, boolean[] visited, int city) {
-        for (int i = 0; i < isConnected.length; i++) {
+        visited[city] = true;
+        for (int i = 0; i < isConnected[city].length; i++) {
             if (isConnected[city][i] == 1 && !visited[i]) {
-                visited[city] = true;
-                dfs(isConnected, visited, isConnected[city][i]);
+                dfs(isConnected, visited, i);
             }
         }
     }
