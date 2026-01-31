@@ -14,7 +14,7 @@ public class MeetingRooms {
             int start = meetings[i][0];
             int end = meetings[i][1];
 
-            if (minHeap.peek() <= start) {
+            while (!minHeap.isEmpty() && minHeap.peek() <= start) {
                 minHeap.poll();
             }
 
