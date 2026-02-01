@@ -71,6 +71,21 @@ public class SubarraySumEqualsK {
         return subarray;
     }
 
+    public int bruteForce(int[] nums, int k) {
+        int ans = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            for (int j = i; j < n; j++) {
+                sum += nums[j];
+                if (sum == k) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         int[] nums = { 1, -1, 0 };
         int k = 3;
