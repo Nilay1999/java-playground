@@ -1,3 +1,5 @@
+package Greedy;
+
 /**
  * Minimum Person To Teach Algorithm (Greedy with Set):
  * Find minimum number of people to teach a language so all friends can communicate.

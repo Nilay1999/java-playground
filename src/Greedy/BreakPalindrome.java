@@ -1,6 +1,9 @@
+package Greedy;
+
 /**
  * Break Palindrome Algorithm (Greedy):
- * Replace exactly one character to make lexicographically smallest non-palindrome.
+ * Replace exactly one character to make lexicographically smallest
+ * non-palindrome.
  * 
  * GREEDY STRATEGY:
  * 1. To get lexicographically smallest: replace leftmost non-'a' with 'a'
@@ -21,7 +24,7 @@
  * Example: "abccba"
  * First non-'a' at index 1 ('b') → change to 'a' → "aaccba"
  * 
- * Example: "aaaa"  
+ * Example: "aaaa"
  * All 'a's → change last to 'b' → "aaab"
  * 
  * Time: O(n), Space: O(n) for char array

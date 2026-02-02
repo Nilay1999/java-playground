@@ -1,3 +1,5 @@
+package Greedy;
+
 /**
  * Maximum Average Pass Ratio Algorithm (Greedy with Max Heap):
  * Distribute extra students to maximize average pass ratio across all classes.

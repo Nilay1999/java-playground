@@ -8,11 +8,11 @@ public class DecodeTheSlantedCiphertext {
      * 3. Remove trailing spaces from decoded message
      * 
      * Visual Example (rows=4):
-     * "iveo    eed   l te   olc" → Matrix:
-     * i v e o     
-     *   e e d    
-     *     l   t e
-     *       o l c
+     * "iveo eed l te olc" → Matrix:
+     * i v e o
+     * e e d
+     * l t e
+     * o l c
      * 
      * Read diagonals: i→ →e→l→o, v→e→ →l, e→e→t→c, o→d→e, etc.
      * 
@@ -21,12 +21,12 @@ public class DecodeTheSlantedCiphertext {
     public String decodeCiphertext(String encodedText, int rows) {
         // Calculate number of columns based on total length and rows
         int cols = encodedText.length() / rows;
-        
+
         // Edge case: empty string
         if (encodedText.isEmpty()) {
             return "";
         }
-        
+
         // Step 1: Reconstruct 2D matrix from encoded string
         char[][] matrix = new char[rows][cols];
         int k = 0;
@@ -37,7 +37,7 @@ public class DecodeTheSlantedCiphertext {
                 k++;
             }
         }
-        
+
         // Step 2: Read diagonally starting from each column in first row
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < cols; i++) {
