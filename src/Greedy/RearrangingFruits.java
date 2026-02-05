@@ -1,3 +1,5 @@
+package Greedy;
+
 /**
  * Rearranging Fruits Algorithm (Greedy with Sorting):
  * Minimize cost to make two fruit baskets identical by swapping fruits.

@@ -5,7 +5,8 @@ public class KnapSack {
      * 0/1 Knapsack Algorithm (Memoization):
      * Find maximum profit with weight constraint, each item used at most once.
      * 
-     * State: memo[index][capacity] = max profit using items 0..index with given capacity
+     * State: memo[index][capacity] = max profit using items 0..index with given
+     * capacity
      * 
      * Recurrence:
      * - If weight[i] > capacity: skip item → memo[i-1][capacity]
@@ -50,12 +51,58 @@ public class KnapSack {
         return dfs(memo, profit, weight, capacity, n - 1);
     }
 
+    /**
+     * 0/1 Knapsack Algorithm (Tabulation):
+     * Find maximum profit with weight constraint, each item used at most once.
+     * 
+     * State: dp[i][j] = max profit using first i items with capacity j
+     * 
+     * Recurrence:
+     * - If weight[i-1] <= j: dp[i][j] = max(dp[i-1][j], profit[i-1] +
+     * dp[i-1][j-weight[i-1]])
+     * - Else: dp[i][j] = dp[i-1][j]
+     * 
+     * Base case: dp[0][j] = 0, dp[i][0] = 0
+     * 
+     * Time: O(n × capacity), Space: O(n × capacity)
+     */
+
+    private int tabulation(int[] profit, int[] weight, int capacity) {
+        int n = profit.length;
+        // dp[i][j] = max profit using first i items with capacity j
+        int[][] dp = new int[n + 1][capacity + 1];
+
+        // Initialize base cases: no items or no capacity means profit 0
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 0; // No capacity
+        }
+        for (int j = 0; j <= capacity; j++) {
+            dp[0][j] = 0; // No items
+        }
+
+        // Fill the dp table bottom-up
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= capacity; j++) {
+                if (weight[i - 1] <= j) {
+                    int take = profit[i - 1] + dp[i - 1][j - weight[i - 1]];
+                    int skip = dp[i - 1][j];
+                    dp[i][j] = Math.max(take, skip);
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+
+        // The answer is the max profit with all items and full capacity
+        return dp[n][capacity];
+    }
+
     public static void main(String[] args) {
         int[] weight = { 4, 5, 1 };
         int[] profit = { 1, 2, 3 };
         int capacity = 4;
 
-        System.out.println(new KnapSack().memoization(profit, weight, capacity));
+        System.out.println(new KnapSack().tabulation(profit, weight, capacity));
     }
 
 }
